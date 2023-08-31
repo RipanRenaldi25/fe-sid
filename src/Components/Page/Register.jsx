@@ -1,5 +1,6 @@
 import React from 'react';
 import AsideBarInformation from '../Presentational/AsideBarInformation';
+import RegisterForm from '../Presentational/RegisterForm';
 
 function RegisterPage() {
   return (
@@ -11,7 +12,10 @@ function RegisterPage() {
         </div>
       </section>
       <section className="flex-1">
-        <h1>right</h1>
+        <div className="w-[80%] border-2 min-h-[calc(70vh-100px)] px-4 py-5">
+          <RegisterForm />
+
+        </div>
       </section>
     </article>
   );
