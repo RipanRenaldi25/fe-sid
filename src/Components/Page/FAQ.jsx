@@ -11,7 +11,7 @@ function FAQ() {
     dispatch(toggleAccordionACtioncreator(index));
   };
   return (
-    <section className="mt-10">
+    <article className="mt-10">
       <header className="flex justify-center items-center flex-col gap-2">
         <h1 className="text-4xl font-semibold">FAQs</h1>
         <h2 className="text-3xl font-thin">Frequently Asked Questions</h2>
@@ -21,7 +21,7 @@ function FAQ() {
         <AccordionList accordionList={accordions} onClickHandler={onClickAccordionHandler} />
 
       </section>
-    </section>
+    </article>
   );
 }
 

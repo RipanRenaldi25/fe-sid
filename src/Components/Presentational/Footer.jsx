@@ -22,7 +22,7 @@ const sosmed = [
 
 function Footer() {
   return (
-    <footer className="bg-primary-gray py-14 px-20">
+    <footer className="bg-primary-gray py-14 px-20 rounded-xl shadow-lg">
       <header className="grid-cols-3 grid h-[200px] gap-4 p-4">
         <section className="">
           <h1 className="text-xl font-semibold text-gray-500 mb-2">WHO WE ARE</h1>
@@ -42,7 +42,7 @@ function Footer() {
               Email
             </button>
             <button type="button" className="profile">
-              Profile
+              Call Us (+62)   81239839281
             </button>
           </div>
         </section>

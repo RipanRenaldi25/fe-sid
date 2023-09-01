@@ -10,6 +10,7 @@ import RegisterPage from './Components/Page/Register';
 import Login from './Components/Page/Login';
 import HomePage from './Components/Page/Home';
 import FAQ from './Components/Page/FAQ';
+import Profile from './Components/Page/Profile';
 
 function App() {
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ function App() {
             <Route path="/login" Component={Login} />
             <Route path="/home" Component={HomePage} />
             <Route path="/faq" Component={FAQ} />
+            <Route path="/profile" Component={Profile} />
           </Routes>
         </main>
       </article>

@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../Reusable/Card';
 
 function CardWithProfileImage(Component) {
-  const wrappedComponent = (props) => (
+  const wrappedComponent = ({ title, description }) => (
     <h1>hello world</h1>
   );
 
