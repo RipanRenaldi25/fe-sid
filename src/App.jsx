@@ -11,6 +11,7 @@ import Login from './Components/Page/Login';
 import HomePage from './Components/Page/Home';
 import FAQ from './Components/Page/FAQ';
 import Profile from './Components/Page/Profile';
+import DocumentPage from './Components/Page/DocumentPage';
 
 function App() {
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ function App() {
             <Route path="/home" Component={HomePage} />
             <Route path="/faq" Component={FAQ} />
             <Route path="/profile" Component={Profile} />
+            <Route path="/document" Component={DocumentPage} />
           </Routes>
         </main>
       </article>

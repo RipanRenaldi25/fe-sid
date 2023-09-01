@@ -5,39 +5,6 @@ import geografis from '../../assets/images/geografis.png';
 import { initialState } from '../../states';
 import Footer from '../Presentational/Footer';
 
-const data = [
-  {
-    instansi: '(PAUD) TK',
-    tenaga: 8,
-    jumlah: 3,
-  },
-  {
-    instansi: '(PAUD) RA',
-    tenaga: 8,
-    jumlah: 3,
-  },
-  {
-    instansi: 'SD',
-    tenaga: 45,
-    jumlah: 4,
-  },
-  {
-    instansi: 'SMP / MTS',
-    tenaga: 14,
-    jumlah: 3,
-  },
-  {
-    instansi: 'SMA / SMK / MA',
-    tenaga: 255,
-    jumlah: 3,
-  },
-  {
-    instansi: 'Pondok Pesantren',
-    jumlah: 2,
-    tenaga: 389,
-  },
-];
-
 function Profile() {
   const [dataStatis] = useState(initialState);
   return (
