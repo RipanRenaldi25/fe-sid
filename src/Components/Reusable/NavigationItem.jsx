@@ -13,8 +13,8 @@ function NavigationItem({ path, title }) {
 }
 
 NavigationItem.propTypes = {
-  path: propTypes.string.isRequired,
-  title: propTypes.string.isRequired,
+  path: propTypes.any.isRequired,
+  title: propTypes.any.isRequired,
 };
 
 export default NavigationItem;
