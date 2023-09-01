@@ -12,7 +12,7 @@ function LandingPage() {
   return (
     <article className="px-10 py-5 h-full">
       <section className="grid grid-cols-4 grid-rows-6 gap-4 h-[500px]">
-        <div className="group relative col-span-2 row-span-6 p-10 rounded-2xl bg-cover bg-left text-white" style={{ backgroundImage: `url(${bgDark})` }}>
+        <div className="hover:cursor-pointer group relative col-span-2 row-span-6 p-10 rounded-2xl bg-cover bg-left text-white" style={{ backgroundImage: `url(${bgDark})` }} onClick={() => navigate('/home')} id="#info">
           <p className="text-lg font-thin mb-3">Information</p>
           <h1 className="text-5xl max-w-md">Babakan Peuteuy Village</h1>
           <div className="text-2xl absolute top-1/2 right-0">
@@ -37,7 +37,7 @@ function LandingPage() {
             </Link>
           </div>
         </div>
-        <div className="relative bg-yellow-dark row-span-2 h-[240px] rounded-xl px-5 py-3" onClick={() => navigate('/faq')}>
+        <div className="relative bg-yellow-dark row-span-2 h-[240px] rounded-xl px-5 py-3 hover:cursor-pointer" onClick={() => navigate('/faq')}>
           <p className="max-w-[100px] font-semibold">Have Some Questions?</p>
           <Link to="document" className="absolute top-3 right-3 text-3xl">
             <HiMiniArrowUpRight />

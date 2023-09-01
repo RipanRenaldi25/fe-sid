@@ -2,10 +2,11 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    scroll-behaviour: smooth;
 }
 
 .app {
     background-image: url('./assets/images/main-bg.jpg');
     background-position: center;
-    backgroun-size: cover;
+    background-size: cover;
 }

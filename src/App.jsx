@@ -7,12 +7,15 @@ import NavigationBar from './Components/Presentational/NavigationBar';
 import logo from './assets/images/logo.png';
 import LandingPage from './Components/Page/Landing';
 import RegisterPage from './Components/Page/Register';
+import Login from './Components/Page/Login';
+import HomePage from './Components/Page/Home';
+import FAQ from './Components/Page/FAQ';
 
 function App() {
   const navigate = useNavigate();
   return (
-    <div className="relative app min-h-screen flex justify-center items-center overflow-hidden">
-      <article className="relative bg-primary-white min-h-[calc(100vh-100px)] max-h-[calc(100vh-100px)] min-w-[calc(100%-150px)] rounded-xl overflow-hidden">
+    <div className="relative app min-h-screen flex justify-center items-center">
+      <article className="relative bg-primary-white min-h-[calc(100vh-100px)] max-h-[calc(100vh-100px)] min-w-[calc(100%-150px)] rounded-xl overflow-auto">
         <header className="flex justify-between border-[3px] border-dotted border-spacing-10 rounded-xl">
           <section className="flex items-center p-8 gap-5">
             <section className="logo">
@@ -37,6 +40,9 @@ function App() {
           <Routes>
             <Route path="/" Component={LandingPage} />
             <Route path="/signup" Component={RegisterPage} />
+            <Route path="/login" Component={Login} />
+            <Route path="/home" Component={HomePage} />
+            <Route path="/faq" Component={FAQ} />
           </Routes>
         </main>
       </article>

@@ -12,6 +12,7 @@ export default {
         'primary-black': '#111111',
         'secondary-black': '#2F2F2F',
         'yellow-gray': '#FFE6BC',
+        'primary-gray': '#EFEFEF',
       },
     },
   },
