@@ -1,9 +1,17 @@
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const useFormInput = (stateKey, actionCreator) => {
-  const { form } = useSelector((states) => states);
+  const { form, auth } = useSelector((states) => states);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (auth.isLogin) {
+      navigate('/');
+    }
+  }, [auth.isLogin]);
   const onChangeInputHandler = (payload) => {
     dispatch(actionCreator.onChangeInput(payload));
   };

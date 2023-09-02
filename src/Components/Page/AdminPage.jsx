@@ -16,7 +16,7 @@ function AdminPage() {
   const [sidebarList, setSidebarList] = useState([
     {
       title: 'Documents',
-      path: '/dashboard/document',
+      path: '/dashboard',
       icon: <FaBook />,
       isActive: true,
     },
@@ -41,6 +41,7 @@ function AdminPage() {
         isActive: nav.path === path,
       }))
     ));
+    navigate(path);
   };
   return (
     <article className="Admin Page relative bg-bg-color min-h-screen">
@@ -63,14 +64,9 @@ function AdminPage() {
             </ul>
           </nav>
         </div>
-        <div className="group relative bottom-10 flex justif- items-center gap-2px-2 py-2 rounded-lg hover:bg-purple-color hover:text-primary-white cursor-pointer transition-colors">
-          <span className="min-w-[40px] text-xl ml-8">
-            <CiLogout />
-          </span>
-          <button
-            type="button"
-            className={`${!sidebarOpen && 'opacity-0 group-hover:opacity-100 group-hover:ml-6 group-hover:text-black'}`}
-            onClick={
+        <div
+          className="group relative bottom-10 flex justif- items-center gap-2px-2 py-2 rounded-lg hover:bg-purple-color hover:text-primary-white cursor-pointer transition-colors"
+          onClick={
             () => {
               dispatch(setIsLogin(false));
               dispatch(logoutUser());
@@ -79,6 +75,13 @@ function AdminPage() {
               removeRefreshToken({ key: 'REFRESH_TOKEN' });
             }
           }
+        >
+          <span className="min-w-[40px] text-xl ml-8">
+            <CiLogout />
+          </span>
+          <button
+            type="button"
+            className={`${!sidebarOpen && 'opacity-0 group-hover:opacity-100 group-hover:ml-6 group-hover:text-black'}`}
           >
             Log Out
           </button>

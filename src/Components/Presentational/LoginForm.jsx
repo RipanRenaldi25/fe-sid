@@ -1,6 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import TextInput from '../Reusable/TextInput';
 import NavigationItem from '../Reusable/NavigationItem';
 import { changeInputLoginActionCreator, clearInputLoginActionCreator, asyncLogin } from '../../states';
@@ -8,15 +6,14 @@ import useFormInput from '../../hooks/useInput';
 
 function LoginForm() {
   const [loginInput, { onChangeInputHandler, asyncEventHandler }] = useFormInput('loginInput', { onChangeInput: changeInputLoginActionCreator, onClearAction: clearInputLoginActionCreator, onAsyncAction: asyncLogin });
-  const navigate = useNavigate();
+  console.log({ loginInput });
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
-    asyncEventHandler({
+    await asyncEventHandler({
       username: loginInput.username,
       password: loginInput.password,
     });
-    navigate('/');
   };
 
   return (

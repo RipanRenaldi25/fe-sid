@@ -62,7 +62,8 @@ export const asyncLogin = ({ username, password }) => async (dispatch) => {
         role: data.role,
       },
     });
-  } catch (e) {
-    console.log(e.message);
+    alert('Login Berhasil');
+  } catch ({ response }) {
+    alert(response.data.message);
   }
 };

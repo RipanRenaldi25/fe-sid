@@ -16,7 +16,9 @@ import Profile from './Components/Page/Profile';
 import DocumentPage from './Components/Page/DocumentPage';
 import AdminPage from './Components/Page/AdminPage';
 import { getAccessToken, removeAccessToken, removeRefreshToken } from './utils/utilities';
-import { logoutUser, setIsLogin, setUserActionCreator } from './states';
+import {
+  clearInputLoginActionCreator, logoutUser, setIsLogin, setUserActionCreator,
+} from './states';
 
 function App() {
   const { auth: { user, isLogin } } = useSelector((states) => states);
@@ -34,7 +36,7 @@ function App() {
     <div>
       {isLogin && user.role === 'admin' ? (
         <Routes>
-          <Route path="/" Component={AdminPage} />
+          <Route path="/*" Component={AdminPage} />
         </Routes>
       ) : (
         <div className="base relative app min-h-screen flex justify-center items-center">

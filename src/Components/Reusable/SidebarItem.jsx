@@ -10,9 +10,9 @@ function SidebarItem({
       <span className="min-w-[40px] flex justify-center items-center text-xl">
         {icon}
       </span>
-      <Link to={path} className={`${!sidebarOpen && 'opacity-0 group-hover:opacity-100 pointer-events-none group-hover:ml-8 group-hover:text-black'}`}>
+      <span to={path} className={`${!sidebarOpen && 'opacity-0 group-hover:opacity-100 pointer-events-none group-hover:ml-8 group-hover:text-black'}`}>
         {title}
-      </Link>
+      </span>
     </li>
   );
 }
