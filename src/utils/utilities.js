@@ -71,3 +71,13 @@ export const getFileSize = (size) => {
   const sizeInMb = size / 1_000_000;
   return `${sizeInMb.toFixed(1)} MB`;
 };
+
+export const splitFileName = (fileName) => {
+  const splitedFileName = fileName.split('.');
+  const fileExtension = splitedFileName[splitedFileName.length - 1];
+  const originalName = splitedFileName.slice(0, splitedFileName.length - 1).join(' ');
+
+  return [originalName, fileExtension];
+};
+
+console.log('asd');
