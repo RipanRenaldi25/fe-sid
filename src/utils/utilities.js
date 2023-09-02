@@ -59,3 +59,15 @@ export const removeAccessToken = ({ key }) => {
 export const removeRefreshToken = ({ key }) => {
   localStorage.removeItem(key);
 };
+
+export const getFileType = (fileType) => {
+  if (fileType === 'application/pdf') {
+    return fileType;
+  }
+  return fileType.split('/')[0];
+};
+
+export const getFileSize = (size) => {
+  const sizeInMb = size / 1_000_000;
+  return `${sizeInMb.toFixed(1)} MB`;
+};
