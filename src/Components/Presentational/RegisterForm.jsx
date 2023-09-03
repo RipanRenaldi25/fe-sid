@@ -12,7 +12,7 @@ function RegisterForm() {
     const name = `${registerInput.firstName} ${registerInput.lastName}`;
     const { username, password, nik } = registerInput;
     asyncEventHandler({
-      name, username, password, nik, role: 'user',
+      name, username, password, nik, role: 'user', phoneNumber: registerInput.phoneNumber,
     });
   };
   return (
@@ -25,6 +25,7 @@ function RegisterForm() {
         <TextInput title="NIK" placeholder="3273xxxxxxx" type="text" value={registerInput.nik} name="nik" onChange={onChangeInputHandler} />
         <TextInput title="Username" placeholder="johndoe" type="text" value={registerInput.username} name="username" onChange={onChangeInputHandler} />
         <TextInput title="Password" placeholder="****" type="password" value={registerInput.password} name="password" onChange={onChangeInputHandler} />
+        <TextInput title="Nomor Telepon" placeholder="0812323123" type="text" value={registerInput.phoneNumber} name="phoneNumber" onChange={onChangeInputHandler} />
       </div>
       <NavigationItem path="login" title="Already have an account? Click here!" />
       <button type="submit" className="mt-2 w-full bg-yellow-dark rounded-md py-2 font-semibold">

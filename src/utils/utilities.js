@@ -3,7 +3,7 @@ import { logoutUser, setIsLogin } from '../states';
 
 // username, password, role, name, nik
 export const registerUser = async ({
-  username, password, name, nik, role,
+  username, password, name, nik, role, phoneNumber,
 }) => {
   const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/users/register`, {
     username,
@@ -11,6 +11,7 @@ export const registerUser = async ({
     name,
     nik,
     role,
+    phone: phoneNumber,
   });
 
   return response.data;

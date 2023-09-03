@@ -30,11 +30,11 @@ export const clearInputLoginActionCreator = () => ({
 
 // username, password, role, name, nik
 export const asyncRegister = ({
-  username, password, name, nik, role,
+  username, password, name, nik, role, phoneNumber,
 }) => async () => {
   try {
     const data = await registerUser({
-      username, password, name, nik, role,
+      username, password, name, nik, role, phoneNumber,
     });
     if (data) {
       alert('Registrasi berhasil');

@@ -7,6 +7,7 @@ const initialState = {
     nik: '',
     username: '',
     password: '',
+    phoneNumber: '',
   },
   loginInput: {
     username: '',
@@ -33,6 +34,7 @@ const formReducer = (state = initialState, action = {}) => {
           nik: '',
           username: '',
           password: '',
+          phoneNumber: '',
         },
       };
     case FormActionType.changeInputLoginValue:
