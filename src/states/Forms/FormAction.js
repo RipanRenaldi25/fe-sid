@@ -40,7 +40,9 @@ export const asyncRegister = ({
       alert('Registrasi berhasil');
     }
   } catch (e) {
-    console.log(e.message);
+    if (e.response.status === 422) {
+      alert('isi form terlebih dahulu');
+    }
   }
 };
 
