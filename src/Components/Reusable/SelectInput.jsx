@@ -1,12 +1,14 @@
-import { arrayOf, object } from 'prop-types';
+import {
+  arrayOf, func, object, string,
+} from 'prop-types';
 import React from 'react';
 import { IoMdArrowDropdown } from 'react-icons/io';
 
-function SelectInput({ options }) {
+function SelectInput({ options, onChangeHandler, documentType }) {
   return (
     <div className="w-full relative">
       <span className="absolute z-10 top-1/2 -translate-y-1/2 right-4 text-xl"><IoMdArrowDropdown /></span>
-      <select className="relative w-full bg-none  outline-none py-2 px-4 rounded-lg appearance-none">
+      <select className="relative w-full bg-none  outline-none py-2 px-4 rounded-lg appearance-none" onChange={onChangeHandler} value={documentType}>
         {options.map((option) => (
           <option name={option.title} value={option.value} key={option.value}>{option.title}</option>
         ))}
@@ -17,6 +19,8 @@ function SelectInput({ options }) {
 
 SelectInput.propTypes = {
   options: arrayOf(object).isRequired,
+  onChangeHandler: func.isRequired,
+  documentType: string.isRequired,
 };
 
 export default SelectInput;

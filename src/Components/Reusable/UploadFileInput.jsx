@@ -1,7 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import {
-  arrayOf, bool, number, object, string,
-} from 'prop-types';
+import { func } from 'prop-types';
 import React, { useRef, useState } from 'react';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
 
@@ -69,5 +67,9 @@ function UploadFileInput({ setFiles }) {
     </section>
   );
 }
+
+UploadFileInput.propTypes = {
+  setFiles: func,
+};
 
 export default UploadFileInput;

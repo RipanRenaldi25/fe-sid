@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { AiOutlineCheck, AiOutlineFilePdf } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import SelectInput from '../Reusable/SelectInput';
 import UploadFileInput from '../Reusable/UploadFileInput';
-import { getFileSize, getFileType, splitFileName } from '../../utils/utilities';
+import {
+  getAccessToken,
+  getFileSize, getFileType, getRefreshToken, logout, splitFileName, updateAccessToken,
+} from '../../utils/utilities';
 
 const selectOptions = [
+  {
+    title: 'Pilih Jenis Dokumen',
+    value: 'default',
+  },
   {
     title: 'Surat Kematian',
     value: 'surat_kematian',
@@ -32,28 +41,62 @@ function UploadForm() {
   const [percent, setPercent] = useState(0);
   const [uploading, setUploading] = useState(false);
   const [files, setFiles] = useState([]);
+  const [documentType, setDocumentType] = useState('default');
+  console.log({ documentType });
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const uploadFiles = async ({ documentKind, documents }) => {
-    const formData = new FormData();
-    formData.append('documentKind', documentKind);
-    documents.forEach((document) => {
-      formData.append('document', document);
-    });
-    const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/documents`, formData, {
-      headers: {
-        Authorization: 'BEARER eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItMTM0YTlhNGMtYjYxNy00MGE2LWIyZjYtMjc4ZGQ5OWZkM2ZjIiwicm9sZSI6InVzZXIiLCJ1c2VybmFtZSI6InJpcGFucmVuYWxkaSIsImlhdCI6MTY5MzYxMjM5MiwiZXhwIjoxNjkzNjE1OTkyfQ.pd5PXZYyrqzid1tRoD8PARyix5VwNrf4HKyr2cDX57s',
-      },
-      onUploadProgress: (progressEvent) => {
-        setUploading(true);
-        const percentage = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-        setPercent(percentage);
-      },
-    });
+    if (documentType === 'default') {
+      alert('Pilih jenis dokumen terlebih dahulu');
+      return;
+    }
+    let formData;
+    try {
+      formData = new FormData();
+      formData.append('documentKind', documentKind);
+      documents.forEach((document) => {
+        formData.append('document', document);
+      });
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/documents`, formData, {
+        headers: {
+          Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
+        },
+        onUploadProgress: (progressEvent) => {
+          setUploading(true);
+          const percentage = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          setPercent(percentage);
+          setUploading(false);
+        },
+      });
+      alert('document berhasil di upload');
+    } catch ({ response }) {
+      try {
+        await updateAccessToken();
+        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/documents`, formData, {
+          headers: {
+            Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
+          },
+          onUploadProgress: (progressEvent) => {
+            setUploading(true);
+            const percentage = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            setPercent(percentage);
+          },
+        });
+        alert('document berhasil di upload');
+      } catch ({ response: { status } }) {
+        if (status === 403) {
+          await logout(dispatch);
+          alert('Silahkan login kembali');
+          navigate('/login');
+        }
+      }
+    }
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await uploadFiles({ documentKind: 'skpi', documents: files });
+    await uploadFiles({ documentKind: documentType, documents: files });
   };
 
   return (
@@ -67,7 +110,7 @@ function UploadForm() {
             </header>
             <div className="type mb-5">
               <h1 className="mb-3">Jenis Dokumen</h1>
-              <SelectInput options={selectOptions} />
+              <SelectInput options={selectOptions} onChangeHandler={(e) => setDocumentType(e.target.value)} value={documentType} />
             </div>
             <div>
               <UploadFileInput percent={percent} fileSize={5} fileType="pdf" uploading={uploading} setFiles={setFiles} files={files} />
@@ -80,7 +123,7 @@ function UploadForm() {
         <section className="">
           <h1 className="font-semibold">Uploaded File</h1>
           {files.map((file) => (
-            <div className="flex justify-between mt-4">
+            <div className="flex justify-between mt-4" key={file.name}>
               <div className="flex gap-5">
                 <span className="text-4xl flex justify-center items-center w-[40px] h-[40px]"><AiOutlineFilePdf /></span>
                 <div className="mr-2 w-32">

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { logoutUser, setIsLogin } from '../states';
 
 // username, password, role, name, nik
 export const registerUser = async ({
@@ -11,7 +12,6 @@ export const registerUser = async ({
     nik,
     role,
   });
-  console.log({ response });
 
   return response.data;
 };
@@ -38,7 +38,6 @@ export const putRefreshTokenOnLocalStorage = ({ key, token }) => {
 
 export const getAccessToken = ({ key }) => {
   if (!sessionStorage.getItem(key)) {
-    console.log('token tidak ditemukan');
     return;
   }
   return JSON.parse(sessionStorage.getItem(key));
@@ -46,7 +45,6 @@ export const getAccessToken = ({ key }) => {
 
 export const getRefreshToken = ({ key }) => {
   if (!localStorage.getItem(key)) {
-    console.log('Refresh token tidak ditemukan');
     return;
   }
   return JSON.parse(localStorage.getItem(key));
@@ -80,4 +78,22 @@ export const splitFileName = (fileName) => {
   return [originalName, fileExtension];
 };
 
-console.log('asd');
+export const logout = async (dispatch) => {
+  dispatch(setIsLogin(false));
+  dispatch(logoutUser());
+  try {
+    await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/authentications/${getRefreshToken({ key: 'REFRESH_TOKEN' })}`);
+  } catch (e) {
+    console.log(e);
+  }
+  removeAccessToken({ key: 'ACCESS_TOKEN' });
+  removeRefreshToken({ key: 'REFRESH_TOKEN' });
+  removeAccessToken({ key: 'USER' });
+};
+
+export const updateAccessToken = async () => {
+  const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/authentications`, {
+    refreshToken: getRefreshToken({ key: 'REFRESH_TOKEN' }),
+  });
+  putAccessTokenOnSessionStorage({ key: 'ACCESS_TOKEN', token: response.data.accessToken });
+};
