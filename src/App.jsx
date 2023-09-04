@@ -17,7 +17,7 @@ import DocumentPage from './Components/Page/DocumentPage';
 import AdminPage from './Components/Page/AdminPage';
 import { getAccessToken, removeAccessToken, removeRefreshToken } from './utils/utilities';
 import {
-  clearInputLoginActionCreator, logoutUser, setIsLogin, setUserActionCreator,
+  logoutUser, setIsLogin, setUserActionCreator,
 } from './states';
 
 function App() {

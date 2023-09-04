@@ -8,6 +8,14 @@ export {
   clearInputRegisterActionCreator,
   clearInputLoginActionCreator,
   asyncLogin,
+  clearInputSearchBar,
+  changeInputSearchFormActionCreator,
 } from './Forms/FormAction';
+export {
+  asyncGetRequests,
+  asyncGetSpecificRequest,
+  asyncDownloadDocuments,
+  asyncChangeStatusDocument
+} from './requests/requestAction';
 
 export { setUserActionCreator, setIsLogin, logoutUser } from './Authentication/authenticationAction';

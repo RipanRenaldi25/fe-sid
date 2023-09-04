@@ -3,6 +3,8 @@ const FormActionType = {
   clearInputRegisterValue: 'CLEAR_INPUT_REGISTER_VALUE',
   changeInputLoginValue: 'CHANGE_INPUT_LOGIN_VALUE',
   clearInputLoginValue: 'CLEAR_INPUT_LOGIN_VALUE',
+  changeInputSearchBar: 'CHANGE_INPUT_SEARCH_BAR',
+  clearInputSearchBar: 'CLEAR_INPUT_SEARCH_BAR',
 };
 
 export default FormActionType;

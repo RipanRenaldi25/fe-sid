@@ -13,6 +13,11 @@ const initialState = {
     username: '',
     password: '',
   },
+  searchForm: {
+    name: '',
+    date: '',
+    process: 'default',
+  },
 };
 
 const formReducer = (state = initialState, action = {}) => {
@@ -51,6 +56,23 @@ const formReducer = (state = initialState, action = {}) => {
         loginInput: {
           username: '',
           password: '',
+        },
+      };
+    case FormActionType.changeInputSearchBar:
+      return {
+        ...state,
+        searchForm: {
+          ...state.searchForm,
+          [action.payload.key]: action.payload.value,
+        },
+      };
+    case FormActionType.clearInputSearchBar:
+      return {
+        ...state,
+        searchForm: {
+          name: '',
+          date: '',
+          process: '',
         },
       };
     default:

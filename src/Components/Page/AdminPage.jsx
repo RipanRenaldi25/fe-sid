@@ -1,16 +1,21 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { FaBook } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   MdKeyboardArrowLeft, MdManageAccounts, MdDashboardCustomize, MdKeyboardArrowRight,
 } from 'react-icons/md';
 import { CiLogout } from 'react-icons/ci';
 import { useDispatch, useSelector } from 'react-redux';
 import SidebarList from './SidebarList';
-import SidebarItem from '../Reusable/SidebarItem';
-import { logoutUser, setIsLogin, setUserActionCreator } from '../../states';
+import {
+  asyncGetRequests, logoutUser, setIsLogin, asyncGetSpecificRequest, asyncDownloadDocuments,
+} from '../../states';
 import { removeAccessToken, removeRefreshToken } from '../../utils/utilities';
+import AdminTable from '../Presentational/AdminTable';
+import CreatedColumn from '../Presentational/CreatedColumnTable';
+import ProcessedColumn from '../Presentational/ProcessedColumnTable';
+import ActionTable from '../Presentational/ActionTable';
 
 function AdminPage() {
   const [sidebarList, setSidebarList] = useState([
@@ -29,7 +34,34 @@ function AdminPage() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { auth: { isLogin } } = useSelector((states) => states);
+  const { auth: { isLogin }, requests: { requests } } = useSelector((states) => states);
+  const data = useMemo(() => requests, [requests]);
+  const columns = [
+    {
+      accessor: 'requestedBy[0].name',
+      Header: 'Name',
+    },
+    {
+      accessor: 'created_at',
+      Header: 'Created',
+      Cell: ({ row }) => CreatedColumn({ date: row.original.created_at }),
+    },
+    {
+      accessor: 'processed',
+      Header: 'Process',
+      Cell: ({ row }) => ProcessedColumn({ process: row.original.processed }),
+    },
+    {
+      accessor: 'request_id',
+      Header: 'Action',
+      Cell: ({ row }) => ActionTable({ id: row.original.request_id, action: asyncDownloadDocuments }),
+    },
+  ];
+  const memoizeColumns = useMemo(() => columns, []);
+
+  useEffect(() => {
+    dispatch(asyncGetRequests());
+  }, []);
   if (!isLogin) {
     navigate('/');
   }
@@ -87,7 +119,9 @@ function AdminPage() {
           </button>
         </div>
       </aside>
-      <section className={`relative ${sidebarOpen ? 'left-[250px] w-[calc(100%-250px)]' : 'left-[88px] w-[calc(100%-88px)]'} transition-all h-screen`}>body content</section>
+      <section className={`relative ${sidebarOpen ? 'left-[250px] w-[calc(100%-250px)]' : 'left-[88px] w-[calc(100%-88px)]'} transition-all h-screen p-5`}>
+        <AdminTable columns={memoizeColumns} data={data} />
+      </section>
     </article>
   );
 }

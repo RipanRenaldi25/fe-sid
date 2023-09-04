@@ -42,7 +42,6 @@ function UploadForm() {
   const [uploading, setUploading] = useState(false);
   const [files, setFiles] = useState([]);
   const [documentType, setDocumentType] = useState('default');
-  console.log({ documentType });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -69,7 +68,6 @@ function UploadForm() {
           setUploading(false);
         },
       });
-      alert('document berhasil di upload');
     } catch ({ response }) {
       try {
         await updateAccessToken();

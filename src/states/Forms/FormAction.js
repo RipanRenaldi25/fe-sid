@@ -12,6 +12,17 @@ export const changeInputActionCreator = ({ key, value }) => ({
   },
 });
 
+export const changeInputSearchFormActionCreator = ({ key, value }) => ({
+  type: FormActionType.changeInputSearchBar,
+  payload: {
+    key, value,
+  },
+});
+
+export const clearInputSearchBar = () => ({
+  type: FormActionType.clearInputSearchBar,
+});
+
 export const clearInputRegisterActionCreator = () => ({
   type: FormActionType.clearInputRegisterValue,
 });

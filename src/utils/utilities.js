@@ -83,6 +83,7 @@ export const logout = async (dispatch) => {
   dispatch(setIsLogin(false));
   dispatch(logoutUser());
   try {
+    1;
     await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/authentications/${getRefreshToken({ key: 'REFRESH_TOKEN' })}`);
   } catch (e) {
     console.log(e);
@@ -98,3 +99,53 @@ export const updateAccessToken = async () => {
   });
   putAccessTokenOnSessionStorage({ key: 'ACCESS_TOKEN', token: response.data.accessToken });
 };
+
+export const getRequests = async () => {
+  const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/documents/requests`, {
+    headers: {
+      Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
+    },
+  });
+  return response;
+};
+
+export const getSpecificRequest = async (requestId) => {
+  const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/documents/request/${requestId}`, {
+    headers: {
+      Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
+    },
+  });
+  return response;
+};
+
+export const downloadMultipleDocument = async (requestId) => {
+  const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/documents/downloads`, {
+    request_id: requestId,
+  }, {
+    headers: {
+      Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
+    },
+    responseType: 'blob',
+  });
+  return response;
+};
+
+export const changeStatusProcess = async (requestId, process) => {
+    const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/documents/request/${requestId}`, {
+      process
+    }, {
+      headers: {
+        Authorization: `BEARER ${getAccessToken({key: 'ACCESS_TOKEN'})}`
+      }
+    });
+    return response;
+}
+
+export const deleteCompressedDocument = async () => {
+  const response = await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/documents/compress`, {
+    headers: {
+      Authorization: `BEARER ${getAccessToken({key: 'ACCESS_TOKEN'})}`
+    }
+  });
+  return response;
+}
