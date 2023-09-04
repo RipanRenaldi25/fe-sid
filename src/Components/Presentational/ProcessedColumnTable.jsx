@@ -13,7 +13,7 @@ function ProcessedColumn({ process }) {
         </h1>
       )}
       {process === 'completed' && (
-      <h1 className="text-green-400 font-semibold">Belum Diproses</h1>
+      <h1 className="text-green-400 font-semibold">Selesai Diproses</h1>
       )}
     </>
   );

@@ -9,7 +9,7 @@ import { CiLogout } from 'react-icons/ci';
 import { useDispatch, useSelector } from 'react-redux';
 import SidebarList from './SidebarList';
 import {
-  asyncGetRequests, logoutUser, setIsLogin, asyncGetSpecificRequest, asyncDownloadDocuments,
+  asyncGetRequests, logoutUser, setIsLogin, asyncDownloadDocuments, asyncChangeStatusDocument
 } from '../../states';
 import { removeAccessToken, removeRefreshToken } from '../../utils/utilities';
 import AdminTable from '../Presentational/AdminTable';
@@ -54,7 +54,7 @@ function AdminPage() {
     {
       accessor: 'request_id',
       Header: 'Action',
-      Cell: ({ row }) => ActionTable({ id: row.original.request_id, action: asyncDownloadDocuments }),
+      Cell: ({ row }) => ActionTable({ id: row.original.request_id, downloadAction: asyncDownloadDocuments,  completedStatusAction: asyncChangeStatusDocument}),
     },
   ];
   const memoizeColumns = useMemo(() => columns, []);
