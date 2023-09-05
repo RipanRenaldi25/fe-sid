@@ -149,3 +149,14 @@ export const deleteCompressedDocument = async () => {
   });
   return response;
 }
+
+export const searchRequest = async ({keyword, date, status}) => {
+  console.log({keyword, date, status})
+    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/documents/requests/search?keyword=${keyword}&date=${date}&status=${status}`, {
+      headers: {
+        Authorization: `BEARER ${getAccessToken({key: 'ACCESS_TOKEN'})}`
+      }
+    });
+
+    return response;
+}

@@ -16,7 +16,7 @@ const initialState = {
   searchForm: {
     name: '',
     date: '',
-    process: 'default',
+    process: '',
   },
 };
 
@@ -75,6 +75,15 @@ const formReducer = (state = initialState, action = {}) => {
           process: '',
         },
       };
+      case FormActionType.removeSearchInput: 
+        return {
+          ...state,
+          searchForm: {
+            name: '',
+            date: '',
+            process: ''
+          }
+        }
     default:
       return state;
   }

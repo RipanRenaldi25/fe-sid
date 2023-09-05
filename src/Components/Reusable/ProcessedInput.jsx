@@ -5,7 +5,7 @@ import SelectInput from './SelectInput';
 const processOptions = [
   {
     title: 'Status',
-    value: 'default',
+    value: '',
   },
   {
     title: 'Belum Diproses',

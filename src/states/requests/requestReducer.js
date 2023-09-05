@@ -4,6 +4,7 @@ const initialState = {
   isFetching: false,
   error: '',
   requests: [],
+  requestSearched: []
 };
 
 const requestReducer = (state = initialState, action = {}) => {
@@ -25,6 +26,16 @@ const requestReducer = (state = initialState, action = {}) => {
           ...request,
           processed: request.request_id === action.payload.id ? action.payload.newData.processed : request.processed
         }))
+      }
+    case REQUESTS_TYPE.setRequestSearch:
+      return {
+        ...state,
+        requestSearched: [...action.payload.request]
+      }
+    case REQUESTS_TYPE.removeSetRequestSearch:
+      return {
+        ...state,
+        requestSearched: []
       }
     default:
       return state;

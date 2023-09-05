@@ -19,6 +19,12 @@ export const changeInputSearchFormActionCreator = ({ key, value }) => ({
   },
 });
 
+export const clearSearchbarInput = () => {
+  return {
+    type: FormActionType.removeSearchInput
+  }
+}
+
 export const clearInputSearchBar = () => ({
   type: FormActionType.clearInputSearchBar,
 });

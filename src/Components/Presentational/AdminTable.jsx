@@ -4,31 +4,45 @@ import {
   TiArrowSortedDown, TiArrowSortedUp, TiArrowUnsorted,
 } from 'react-icons/ti';
 import { FiSearch } from 'react-icons/fi';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CiCalendarDate } from 'react-icons/ci';
 import SearchBar from '../Reusable/SearchBar';
 import PaginateButton from './PaginateButton';
 import DateInput from '../Reusable/DateInput';
 import useFormInput from '../../hooks/useInput';
-import { changeInputSearchFormActionCreator, clearInputLoginActionCreator } from '../../states';
+import { asyncSearchRequest, changeInputSearchFormActionCreator, clearInputLoginActionCreator } from '../../states';
 import useDebounce from '../../hooks/useDebounce';
 import ProcessedInput from '../Reusable/ProcessedInput';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearSearchbarInput } from '../../states';
+import {AiOutlineClear} from 'react-icons/ai'
+
 
 function AdminTable({ columns, data = [] }) {
   const [searchbarInput, { onChangeInputHandler }] = useFormInput('searchForm', {
     onChangeInput: changeInputSearchFormActionCreator, onClearAction: clearInputLoginActionCreator,
   });
+  const {requests: {requestSearched}} = useSelector(states => states);
+  const dispatch = useDispatch();
   const debounceValue = useDebounce(searchbarInput.name, 400);
+  useEffect(() => {
+    dispatch(asyncSearchRequest({
+      keyword: debounceValue,
+      date: searchbarInput.date,
+      status: searchbarInput.process
+    }))
+  }, [debounceValue, searchbarInput.date, searchbarInput.process])
   const {
     getTableBodyProps, headerGroups, page, prepareRow, nextPage, previousPage, pageCount, state, canNextPage, canPreviousPage,
   } = useTable({
     columns,
-    data,
+    data: requestSearched ? requestSearched : data,
     initialState: {
       pageIndex: 0,
     },
   }, useSortBy, usePagination);
   const { pageIndex } = state;
+  console.log({requestSearched});
   return (
     <section className="bg-sidebar-color py-10  rounded-xl">
       <header className="px-6 mb-4 relative">
@@ -37,6 +51,14 @@ function AdminTable({ columns, data = [] }) {
           <SearchBar icon={<FiSearch />} placeholder="Cari berdasarkan nama" onChangeHandler={onChangeInputHandler} value={searchbarInput.name} />
           <DateInput icon={<CiCalendarDate />} value={searchbarInput.date} onChangeHandler={onChangeInputHandler} />
           <ProcessedInput icon={<TiArrowSortedDown />} value={searchbarInput.process} onChangeHandler={onChangeInputHandler} />
+          <div className=" hover:bg-purple-color hover:text-white flex items-center rounded-xl overflow-hidden shadow-lg border cursor-pointer relative transition-colors" onClick={() => dispatch(clearSearchbarInput())}>
+            <div>
+              <button type='button' className='py-3 px-5 font-thin'>Clear</button>
+            </div>
+            <div className="flex items-center p-3 font-bold text-2xl border-l">
+              <span><AiOutlineClear /></span>
+            </div>
+          </div>
         </div>
       </header>
       <table className="w-full table-auto">

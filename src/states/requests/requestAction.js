@@ -1,4 +1,4 @@
-import { changeStatusProcess, deleteCompressedDocument, downloadMultipleDocument, getRequests, getSpecificRequest } from '../../utils/utilities';
+import { changeStatusProcess, deleteCompressedDocument, downloadMultipleDocument, getRequests, getSpecificRequest, searchRequest } from '../../utils/utilities';
 import REQUESTS_TYPE from './RequestsType';
 
 export const getRequestsActionCreator = (requests) => ({
@@ -41,6 +41,23 @@ export const updateSpecificRequestActionCreator = (id, newData) => {
   }
 }
 
+export const setRequestSearch = (request) =>  {
+  return {
+    type: REQUESTS_TYPE.setRequestSearch,
+    payload: {
+      request
+    }
+  }
+}
+
+export const removeSearchRequest = () => {
+  return {
+    type: REQUESTS_TYPE.removeSetRequestSearch,
+  }
+}
+
+// ----------------------------------------------------------------------------------- //
+
 export const asyncDownloadDocuments = (requestId) => async (dispatch) => {
   try {
     const response = await downloadMultipleDocument(requestId);
@@ -82,3 +99,15 @@ export const asyncGetRequests = () => async (dispatch) => {
   }
   dispatch(setIsFetchingActionCreator(false));
 };
+
+export const asyncSearchRequest = ({keyword, date, status}) => {
+  return async (dispatch) => {
+    try{
+      const { data: response } = await searchRequest({keyword, date, status});
+      dispatch(setRequestSearch(response.data));
+      console.log({response});
+    }catch(e){
+      console.log(e);
+    }
+  }
+}

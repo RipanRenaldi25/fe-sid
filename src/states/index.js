@@ -10,12 +10,14 @@ export {
   asyncLogin,
   clearInputSearchBar,
   changeInputSearchFormActionCreator,
+  clearSearchbarInput
 } from './Forms/FormAction';
 export {
   asyncGetRequests,
   asyncGetSpecificRequest,
   asyncDownloadDocuments,
-  asyncChangeStatusDocument
+  asyncChangeStatusDocument,
+  asyncSearchRequest
 } from './requests/requestAction';
 
 export { setUserActionCreator, setIsLogin, logoutUser } from './Authentication/authenticationAction';
