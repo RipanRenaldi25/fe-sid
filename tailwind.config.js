@@ -19,6 +19,9 @@ export default {
         'bg-color': '#E4E9F7',
         'purple-color': '#695CFE',
       },
+      screens: {
+        mobile: '420px',
+      },
     },
   },
   plugins: [],

@@ -11,24 +11,24 @@ function LandingPage() {
   const navigate = useNavigate();
   return (
     <article className="px-10 py-5 h-full">
-      <section className="grid grid-cols-4 grid-rows-6 gap-4 h-[500px]">
-        <div className="hover:cursor-pointer group relative col-span-2 row-span-6 p-10 rounded-2xl bg-cover bg-left text-white" style={{ backgroundImage: `url(${bgDark})` }} onClick={() => navigate('/home')} id="#info">
-          <p className="text-lg font-thin mb-3">Information</p>
-          <h1 className="text-5xl max-w-md">Babakan Peuteuy Village</h1>
+      <section className="grid mobile:grid-cols-2 mobile:h-[670px] md:grid-cols-4 md:grid-rows-6 gap-4 md:h-[500px]">
+        <div className=" hover:cursor-pointer mobile:row-span-6 group relative col-span-2 row-span-6 p-10 rounded-2xl bg-cover bg-left text-white" style={{ backgroundImage: `url(${bgDark})` }} onClick={() => navigate('/home')} id="#info">
+          <p className="mobile:text-md text-lg font-thin mb-3">Informasi</p>
+          <h1 className="mobile:text-4xl md:text-5xl max-w-md">Desa Babakan Peuteuy</h1>
           <div className="text-2xl absolute top-1/2 right-0">
             <button type="button" className="border rounded-full px-1 py-0.5 scale-0 group-hover:scale-100 transition-all duration-100  hover:bg-gray-200 hover:duration-200 hover:text-black">
               <NavigationItem path="/home" title={<MdKeyboardDoubleArrowRight className="hover:text-black" />} />
             </button>
           </div>
-          <div className="absolute bottom-16">
-            <button type="button" className="border px-10 py-3 bg-white text-black rounded-2xl font-bold text-xl hover:bg-gray-300 transition-colors">
+          <div className="absolute mobile:bottom-7 md:bottom-16">
+            <button type="button" className="mobile:text-sm border px-10 py-3 bg-white text-black rounded-2xl font-bold text-xl hover:bg-gray-300 transition-colors">
               <Link to="/home">
                 Visit Now
               </Link>
             </button>
           </div>
         </div>
-        <div className="relative col-span-2 bg-yellow-200 row-span-3 rounded-tl-[50px] rounded-br-[50px] p-6 bg-cover bg-center text-white hover:cursor-pointer" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(${bgForest})` }} onClick={() => navigate('/profile')}>
+        <div className="mobile:row-span-6 relative col-span-2 bg-yellow-200 md:row-span-3 rounded-tl-[50px] rounded-br-[50px] p-6 bg-cover bg-center text-white hover:cursor-pointer" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(${bgForest})` }} onClick={() => navigate('/profile')}>
           <p className="text-lg font-thin">Profile</p>
           <h1 className="absolute bottom-10 text-2xl">See Our Profile</h1>
           <div className="text-3xl absolute top-2 right-2">

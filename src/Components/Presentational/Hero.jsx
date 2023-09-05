@@ -12,7 +12,7 @@ function Hero({ content, img, directTo }) {
   }
 
   return (
-    <section className="flex justify-between flex-1">
+    <section className="mobile:flex-col mobile:gap-8 md:gap-0 md:flex-row flex justify-between flex-1">
       <div className="flex-1" data-aos="fade-right">
         <h1 className="text-4xl font-semibold mb-8">Desa Babakan Peuteuy</h1>
         <p className="max-w-2xl">{content}</p>

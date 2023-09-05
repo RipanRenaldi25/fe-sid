@@ -21,8 +21,8 @@ const sosmed = [
 
 function Footer() {
   return (
-    <footer className="bg-primary-gray py-14 px-20 rounded-xl shadow-lg">
-      <header className="grid-cols-3 grid h-[200px] gap-4 p-4">
+    <footer className="mobile:p-8 bg-primary-gray md:py-14 md:px-20 rounded-xl shadow-lg">
+      <header className="mobile:grid-cols-1 md:grid-cols-3 grid md:h-[200px] gap-8 p-4">
         <section className="">
           <h1 className="text-xl font-semibold text-gray-500 mb-2">WHO WE ARE</h1>
           <div className="flex flex-col items-start">
@@ -59,8 +59,8 @@ function Footer() {
       <section className="mb-16 after:contents[''] after:block after:w-full after:h-0.5 after:bg-[rgba(0,0,0,.2)] after:relative after:top-4">
         <p>Cicalengka Kabupaten Bandung</p>
       </section>
-      <section className="flex justify-between items-center ">
-        <div className="w-40">
+      <section className="flex justify-between items-center">
+        <div className="mobile:w-20 md:w-40">
           <img src={logo} alt={logo} />
         </div>
         <div>

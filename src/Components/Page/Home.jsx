@@ -35,7 +35,7 @@ function HomePage() {
         <article>
           <section>
             <h1 className="text-2xl font-semibold mt-7 after:contens-[''] after:h-0.5 after:bg-[rgba(0,0,0,.2)] after:w-10 after:block" data-aos="fade-down">Visi & Misi</h1>
-            <div className="grid grid-cols-3">
+            <div className="mobile:grid-cols-1 md:grid-cols-3">
               <section className="mt-4 col-start-2" data-aos="fade-up">
                 <Card title="Visi" description={visi} />
               </section>
@@ -46,7 +46,7 @@ function HomePage() {
       </section>
       <section className="w-full mt-14 rounded-xl overflow-hidden" id="sejarah">
         <h1 className="text-center text-xl mb-5 after:my-1 after:contents-[''] after:block after:h-0.5 after:w-auto after:m-auto after:bg-[rgba(0,0,0,.05)] font-semibold">Sejarah</h1>
-        <div className="grid grid-cols-2 bg-yellow-dark">
+        <div className="mobile:grid-cols-1 grid md:grid-cols-2 bg-yellow-dark">
           <div className="flex justify-center items-center">
             <img src={pedestrian} alt="pedestrian" className="max-h-[500px]" />
           </div>

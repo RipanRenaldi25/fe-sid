@@ -5,6 +5,8 @@ import {
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { CgProfile } from 'react-icons/cg';
+import { RxHamburgerMenu } from 'react-icons/rx';
+import { AiOutlineClose } from 'react-icons/ai';
 import NavigationBar from './Components/Presentational/NavigationBar';
 import logo from './assets/images/logo.png';
 import LandingPage from './Components/Page/Landing';
@@ -47,6 +49,7 @@ function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [isHamburgerClicked, setIsHamburgerClicked] = useState(false);
 
   useEffect(() => {
     const userLogedIn = getAccessToken({ key: 'USER' });
@@ -63,8 +66,9 @@ function App() {
       {
         sidebarOpen,
         setSidebarOpen,
+        isHamburgerClicked,
       }
-    ), [sidebarOpen])}
+    ), [sidebarOpen, isHamburgerClicked])}
     >
       <div>
         {isLogin && user.role === 'admin' ? (
@@ -84,17 +88,29 @@ function App() {
           </article>
         ) : (
           <div className="base relative app min-h-screen flex justify-center items-center">
-            <article className=" relative bg-primary-white bg-opacity-95 backdrop-blur-sm min-h-[calc(100vh-100px)] max-h-[calc(100vh-100px)] max-w-[calc(100%-150px)] min-w-[calc(100%-100px)] rounded-xl overflow-auto">
-              <header className="flex justify-between border-[3px] border-dotted border-spacing-10 rounded-xl">
+            <article className="relative mobile:max-w-full mobile:min-h-screen mobile:overflow-x-hidden bg-primary-white bg-opacity-95 backdrop-blur-sm md:min-h-[calc(100vh-100px)] md:max-h-[calc(100vh-100px)] md:max-w-[calc(100%-150px)] md:min-w-[calc(100%-100px)] rounded-xl md:overflow-auto">
+              <header className="mobile:relative mobile:bg-sidebar-color mobile:top-0 mobile:z-10 md:bg-primary-white md:relative flex md:justify-between mobile:items-center md:border-[3px] md:border-dotted md:border-spacing-10 md:rounded-xl">
                 <section className="flex items-center p-8 gap-5">
-                  <section className="logo">
+                  <section className="logo ">
                     <Link to="/">
                       <img src={logo} alt="logo desa" className="w-20" />
                     </Link>
                   </section>
-                  <NavigationBar />
+                  <div className="mobile:hidden md:block">
+                    <NavigationBar />
+                  </div>
                 </section>
-                <section className="flex p-8">
+                <section className="mobile:flex-1 mobile:flex mobile:justify-end w-full md:hidden text-3xl">
+                  <button type="button" className="p-2" onClick={() => setIsHamburgerClicked((prevState) => !prevState)}>
+                    {isHamburgerClicked ? (
+                      <AiOutlineClose />
+                    ) : (
+                      <RxHamburgerMenu />
+
+                    )}
+                  </button>
+                </section>
+                <section className="md:flex p-8">
                   {isLogin ? (
                     <div className="flex items-center gap-4">
                       <span className="text-2xl flex items-center"><CgProfile /></span>
@@ -114,8 +130,8 @@ function App() {
                       </button>
                     </div>
                   ) : (
-                    <div className="bg-gray-200 flex rounded-xl justify-around w-60 items-center overflow-hidden px-2 py-0">
-                      <button type="button" className="font-bold text-sm h-[80%] hover:bg-gray-400 hover:text-primary-white rounded-xl transition-colors px-5 py-0" onClick={() => navigate('/login')}>
+                    <div className="mobile:hidden bg-gray-200 md:flex rounded-xl justify-around w-60 items-center overflow-hidden px-2 py-0">
+                      <button type="button" className="font-bold text-sm h-[80%] hover:bg-gray-400 hover:text-primary-white rounded-xl transition-colors px-4 py-4 flex justify-center items-center" onClick={() => navigate('/login')}>
                         LOG IN
                       </button>
                       <button type="button" className="text-sm text-white bg-primary-black h-[80%] rounded-xl px-10" onClick={() => navigate('/signup')}>
