@@ -17,14 +17,33 @@ import DocumentPage from './Components/Page/DocumentPage';
 import AdminPage from './Components/Page/AdminPage';
 import { getAccessToken, removeAccessToken, removeRefreshToken } from './utils/utilities';
 import {
+  ToggleOpenModal,
+  asyncRegister,
+  changeInputActionCreator,
+  clearInputRegisterActionCreator,
   logoutUser, setIsLogin, setUserActionCreator,
 } from './states';
 import AccountPage from './Components/Page/AccountPage';
 import Sidebar from './Components/Presentational/Sidebar';
 import SidebarContext from './Context/sidebarContext';
+import Overlay from './Components/Reusable/Overlay';
+import ModalBody from './Components/Presentational/Modal';
+import RegisterForm from './Components/Presentational/RegisterForm';
+import useFormInput from './hooks/useInput';
 
 function App() {
-  const { auth: { user, isLogin } } = useSelector((states) => states);
+  const { auth: { user, isLogin }, form: { modal: { isOpen } } } = useSelector((states) => states);
+  const [registerInput, { onChangeInputHandler, asyncEventHandler }] = useFormInput('registerInput', { onChangeInput: changeInputActionCreator, onAsyncAction: asyncRegister, onClearAction: clearInputRegisterActionCreator });
+
+  const onRegisterHandler = (e) => {
+    e.preventDefault();
+    const name = `${registerInput.firstName} ${registerInput.lastName}`;
+    const { username, password, nik } = registerInput;
+    asyncEventHandler({
+      name, username, password, nik, role: 'admin', phoneNumber: registerInput.phoneNumber,
+    });
+  };
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -50,6 +69,12 @@ function App() {
       <div>
         {isLogin && user.role === 'admin' ? (
           <article className="Admin Page relative bg-bg-color min-h-screen">
+            <section className="modal">
+              <Overlay isOpen={isOpen} onClose={() => dispatch(ToggleOpenModal(false))} />
+              <ModalBody title="Tambah Akun" isOpen={isOpen} onClose={() => dispatch(ToggleOpenModal(false))}>
+                <RegisterForm onChangeInputHandler={onChangeInputHandler} onRegisterHandler={onRegisterHandler} registerInput={registerInput} />
+              </ModalBody>
+            </section>
             <Sidebar />
             <Routes>
               <Route path="/dashboard" Component={AdminPage} />

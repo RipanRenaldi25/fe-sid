@@ -1,20 +1,9 @@
 import React from 'react';
+import { func, object } from 'prop-types';
 import TextInput from '../Reusable/TextInput';
 import NavigationItem from '../Reusable/NavigationItem';
-import { changeInputActionCreator, asyncRegister, clearInputRegisterActionCreator } from '../../states';
-import useFormInput from '../../hooks/useInput';
 
-function RegisterForm() {
-  const [registerInput, { onChangeInputHandler, asyncEventHandler }] = useFormInput('registerInput', { onChangeInput: changeInputActionCreator, onAsyncAction: asyncRegister, onClearAction: clearInputRegisterActionCreator });
-
-  const onRegisterHandler = (e) => {
-    e.preventDefault();
-    const name = `${registerInput.firstName} ${registerInput.lastName}`;
-    const { username, password, nik } = registerInput;
-    asyncEventHandler({
-      name, username, password, nik, role: 'user', phoneNumber: registerInput.phoneNumber,
-    });
-  };
+function RegisterForm({ onRegisterHandler, onChangeInputHandler, registerInput }) {
   return (
     <form onSubmit={onRegisterHandler}>
       <div className="flex justify-between mb-3">
@@ -34,5 +23,11 @@ function RegisterForm() {
     </form>
   );
 }
+
+RegisterForm.propTypes = {
+  onRegisterHandler: func.isRequired,
+  onChangeInputHandler: func.isRequired,
+  registerInput: object.isRequired,
+};
 
 export default RegisterForm;

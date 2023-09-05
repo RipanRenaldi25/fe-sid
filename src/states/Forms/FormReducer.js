@@ -19,8 +19,11 @@ const initialState = {
     process: '',
   },
   searchFormAccount: {
-    nik: ''
-  }
+    nik: '',
+  },
+  modal: {
+    isOpen: false,
+  },
 };
 
 const formReducer = (state = initialState, action = {}) => {
@@ -78,25 +81,32 @@ const formReducer = (state = initialState, action = {}) => {
           process: '',
         },
       };
-      case FormActionType.removeSearchInput: 
-        return {
-          ...state,
-          searchForm: {
-            name: '',
-            date: '',
-            process: ''
-          },
-          searchFormAccount: {
-            nik: ''
-          }
-        }
-      case FormActionType.changeInputNikBar: 
-        return {
-          ...state,
-          searchFormAccount: {
-            [action.payload.key]: action.payload.value
-          }
-        }
+    case FormActionType.removeSearchInput:
+      return {
+        ...state,
+        searchForm: {
+          name: '',
+          date: '',
+          process: '',
+        },
+        searchFormAccount: {
+          nik: '',
+        },
+      };
+    case FormActionType.changeInputNikBar:
+      return {
+        ...state,
+        searchFormAccount: {
+          [action.payload.key]: action.payload.value,
+        },
+      };
+    case FormActionType.toggleOpenModal:
+      return {
+        ...state,
+        modal: {
+          isOpen: action.payload.isOpen,
+        },
+      };
     default:
       return state;
   }

@@ -19,11 +19,9 @@ export const changeInputSearchFormActionCreator = ({ key, value }) => ({
   },
 });
 
-export const clearSearchbarInput = () => {
-  return {
-    type: FormActionType.removeSearchInput
-  }
-}
+export const clearSearchbarInput = () => ({
+  type: FormActionType.removeSearchInput,
+});
 
 export const clearInputSearchBar = () => ({
   type: FormActionType.clearInputSearchBar,
@@ -41,22 +39,27 @@ export const changeInputLoginActionCreator = ({ key, value }) => ({
   },
 });
 
-export const changeInputNikBarActionCreator = ({key, value}) => {
-  return {
-    type: FormActionType.changeInputNikBar,
-    payload: {
-      key,
-      value
-    }
-  }
-}
+export const changeInputNikBarActionCreator = ({ key, value }) => ({
+  type: FormActionType.changeInputNikBar,
+  payload: {
+    key,
+    value,
+  },
+});
 
 export const clearInputNikBarActionCreator = () => ({
-  type: FormActionType.clearInputNikBar
-})
+  type: FormActionType.clearInputNikBar,
+});
 
 export const clearInputLoginActionCreator = () => ({
   type: FormActionType.clearInputLoginValue,
+});
+
+export const ToggleOpenModal = (isOpen) => ({
+  type: FormActionType.toggleOpenModal,
+  payload: {
+    isOpen,
+  },
 });
 
 // username, password, role, name, nik

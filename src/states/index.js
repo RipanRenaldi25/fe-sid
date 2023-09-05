@@ -11,7 +11,8 @@ export {
   clearInputSearchBar,
   changeInputSearchFormActionCreator,
   clearSearchbarInput,
-  changeInputNikBarActionCreator
+  changeInputNikBarActionCreator,
+  ToggleOpenModal,
 } from './Forms/FormAction';
 export {
   asyncGetRequests,
@@ -19,12 +20,12 @@ export {
   asyncDownloadDocuments,
   asyncChangeStatusDocument,
   asyncSearchRequest,
-  updateSpecificRequestActionCreator
+  updateSpecificRequestActionCreator,
 } from './requests/requestAction';
 
 export {
-  asyncGetUser, 
-  asyncGetUsers, 
+  asyncGetUser,
+  asyncGetUsers,
 } from './users/userAction';
 
 export { setUserActionCreator, setIsLogin, logoutUser } from './Authentication/authenticationAction';

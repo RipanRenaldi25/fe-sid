@@ -8,6 +8,7 @@ const FormActionType = {
   removeSearchInput: 'REMOVE_SEARCH_INPUT',
   changeInputNikBar: 'CHANGE_INPUR_NIK_BAR',
   clearInputNikBar: 'CLEAR_INPUT_NIK_BAR',
+  toggleOpenModal: 'TOGGLE_OPEN_MODAL',
 };
 
 export default FormActionType;

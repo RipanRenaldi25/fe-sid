@@ -2,10 +2,10 @@ import { func, object, string } from 'prop-types';
 import React from 'react';
 
 function SearchBar({
-  icon, placeholder, value, onChangeHandler,
+  icon, placeholder, value, onChangeHandler, style,
 }) {
   return (
-    <div id="search" className="relative flex gap-4 items-center shadow-lg w-1/3 py-3 px-4 rounded-xl border-2">
+    <div id="search" className={`relative flex gap-4 items-center shadow-lg w-1/3 py-3 px-4 rounded-xl border-2 ${style}`}>
       <div className="flex items-center text-xl text-slate-400">
         <span>{icon}</span>
       </div>

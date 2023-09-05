@@ -32,7 +32,7 @@ function AccountPage() {
     },
 
   ]), []);
-  const data = useMemo(() => users, []);
+  const data = useMemo(() => users, [users]);
 
   useEffect(() => {
     dispatch(asyncGetUsers());
