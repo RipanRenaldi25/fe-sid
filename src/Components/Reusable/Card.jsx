@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 // eslint-disable-next-line react/prop-types
 function Card({ title, description, children }) {
   return (
-    <section className="border p-4 shadow-md">
+    <section className="border p-4 shadow-md w-full">
       <h1 className="text-2xl font-semibold mb-4">{title}</h1>
       <p>{description}</p>
       {children}

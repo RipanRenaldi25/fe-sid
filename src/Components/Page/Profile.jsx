@@ -66,7 +66,7 @@ function Profile() {
           <img src={geografis} alt="bagandesa" />
         </div>
         <Card title="Deskripsi" description="Desa Babakan Peuteuy merupakan salah satu desa yang terletak di Kabupaten Bandung Provinsi Jawa Barat,dengan luas wilayah ± 419,47 h. Desa Babakan Peuteuy terdiri 5 kadus 15 Rw dan 57 Rt. Adapun batas batas wilayah Desa Babakan Peuteuy dengan Desa lain adalah sebagai berikut: ">
-          <div className="flex mt-7 gap-10">
+          <div className="mobile:flex-col md:flex-row flex mt-7 gap-10">
             <div className="flex-1">
               <ul className="list-disc ml-8 mb-5">
                 <li>
@@ -86,7 +86,7 @@ function Profile() {
                 Secara umum kontur tanah Desa Babakan Peuteuy berupa areal pertanian seperti sawah,kebun dan tegalan.Ketinggian dari atas permukaan laut wilayah terendah berupa lembah adalah ±700 -750m di atas permukaan laut dedngan suhu rata rata adalah 28⁰C - 32⁰c.Secara umum sepanjang tahun mengalami 2 musim yaitu musim hujan di bulan September – April dan musim kemarau di bulan April- Agustus.
               </p>
             </div>
-            <table className="table-fixed text-center border border-black mt-4 flex-1">
+            <table className="mobile:text-sm table-fixed text-center border border-black mt-4 flex-1">
               <thead>
                 <tr>
                   <th>Wilayah</th>
@@ -95,25 +95,25 @@ function Profile() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Sebelah Utara</td>
-                  <td>Dampit</td>
-                  <td>Cicalengka</td>
+                <tr className="mobile:border-2 md:border-none">
+                  <td className="p-1">Sebelah Utara</td>
+                  <td className="p-1">Dampit</td>
+                  <td className="p-1">Cicalengka</td>
                 </tr>
-                <tr>
-                  <td>Sebelah Selatan</td>
-                  <td>Tenjolaya</td>
-                  <td>Cicalengka</td>
+                <tr className="mobile:border-2 md:border-none">
+                  <td className="p-1">Sebelah Selatan</td>
+                  <td className="p-1">Tenjolaya</td>
+                  <td className="p-1">Cicalengka</td>
                 </tr>
-                <tr>
-                  <td>Sebelah Timur</td>
-                  <td>Nagrog</td>
-                  <td>Cicalengka</td>
+                <tr className="mobile:border-2 md:border-none">
+                  <td className="p-1">Sebelah Timur</td>
+                  <td className="p-1">Nagrog</td>
+                  <td className="p-1">Cicalengka</td>
                 </tr>
-                <tr>
-                  <td>Sebelah Barat</td>
-                  <td>Cicalengka Wetan</td>
-                  <td>Cicalengka</td>
+                <tr className="mobile:border-2 md:border-none">
+                  <td className="p-1">Sebelah Barat</td>
+                  <td className="p-1">Cicalengka Wetan</td>
+                  <td className="p-1">Cicalengka</td>
                 </tr>
               </tbody>
             </table>
@@ -126,10 +126,10 @@ function Profile() {
           title="Kondisi Umum"
           description="Berdasarkan data profil desa per tahun 2019, data kependudukan Desa Babakan Peuteuy dapat diuraikan sebagai berikut :"
         >
-          <div className="flex gap-10 my-10">
+          <div className="flex gap-10 my-10 mobile:flex-col md:flex-row">
             <div>
               <h2 className="text-xl mb-2 font-semibold">Sarana Umum</h2>
-              <table className="table-fixed w-full text-center border border-black">
+              <table className="mobile:table-auto md:table-fixed w-full text-center border border-black">
                 <thead>
                   <tr>
                     <th>Jenis</th>
@@ -141,10 +141,10 @@ function Profile() {
                 <tbody>
                   {dataStatis.umum.map((saranaUmum) => (
                     <tr>
-                      <td>{saranaUmum.jenis}</td>
-                      <td>{saranaUmum.satuan}</td>
-                      <td>{saranaUmum.volume}</td>
-                      <td>{saranaUmum.kondisi}</td>
+                      <td className="px-2 py-1">{saranaUmum.jenis}</td>
+                      <td className="px-2 py-1">{saranaUmum.satuan}</td>
+                      <td className="px-2 py-1">{saranaUmum.volume}</td>
+                      <td className="px-2 py-1">{saranaUmum.kondisi}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -152,13 +152,13 @@ function Profile() {
             </div>
             <div className="mb-8 ">
               <h2 className="text-xl mb-2 font-semibold">Jumlah penduduk secara Umum</h2>
-              <table className="table-fixed w-full text-center border border-black">
+              <table className="mobile:table-auto md:table-fixed w-full text-center border border-black">
                 <thead>
                   <tr>
-                    <th>No</th>
-                    <th>Kependudukan</th>
-                    <th>Jumlah</th>
-                    <th>Keterangan</th>
+                    <th className="mobile:p-1 md:p-0">No</th>
+                    <th className="mobile:p-1 md:p-0">Kependudukan</th>
+                    <th className="mobile:p-1 md:p-0">Jumlah</th>
+                    <th className="mobile:p-1 md:p-0">Keterangan</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -180,7 +180,7 @@ function Profile() {
               </table>
             </div>
           </div>
-          <div className="flex gap-10">
+          <div className="mobile:flex-col md:flex-row flex gap-10">
             <div className="mb-8 flex-1">
               <h2 className="text-xl mb-2 font-semibold">Sarana Pendidikan</h2>
               <table className="table-fixed  w-full text-center border border-black">
