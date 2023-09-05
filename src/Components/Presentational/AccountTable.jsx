@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { FiSearch } from 'react-icons/fi';
-import { AiOutlineClear } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { object, arrayOf } from 'prop-types';
 import { BsPersonAdd } from 'react-icons/bs';

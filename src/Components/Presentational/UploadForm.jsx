@@ -7,7 +7,7 @@ import SelectInput from '../Reusable/SelectInput';
 import UploadFileInput from '../Reusable/UploadFileInput';
 import {
   getAccessToken,
-  getFileSize, getFileType, getRefreshToken, logout, splitFileName, updateAccessToken,
+  getFileSize, getFileType, logout, splitFileName, updateAccessToken,
 } from '../../utils/utilities';
 
 const selectOptions = [

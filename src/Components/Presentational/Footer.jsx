@@ -1,5 +1,4 @@
 import React from 'react';
-import propTypes from 'prop-types';
 import { BsFacebook, BsInstagram, BsTwitter } from 'react-icons/bs';
 import logo from '../../assets/images/logo.png';
 import NavigationBar from './NavigationBar';

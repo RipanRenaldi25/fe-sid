@@ -6,7 +6,6 @@ import CardLists from '../Presentational/CardLists';
 import pedestrian from '../../assets/images/pedestrian.svg';
 import kepalaDesa from '../../assets/images/kepaladesa.jpeg';
 import CardImage from '../Presentational/CardImage';
-import JohnDoe from '../../assets/images/john-doe.jpg';
 import Footer from '../Presentational/Footer';
 
 const content = 'Desa Babakan Peuteuy merupakan salah satu desa yang terletak di Kabupaten Bandung Provinsi Jawa Barat,dengan luas wilayah ± 419,47 hektar Desa Babakan Peuteuy terdiri 5 kadus meliputi 15 Rw dan 57 Rt';

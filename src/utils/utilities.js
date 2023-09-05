@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { logoutUser, setIsLogin } from '../states';
 
-// username, password, role, name, nik
 export const registerUser = async ({
   username, password, name, nik, role, phoneNumber,
 }) => {

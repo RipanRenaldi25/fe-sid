@@ -1,8 +1,7 @@
-import React, { useEffect, useMemo } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import UploadForm from '../Presentational/UploadForm';
-import Login from './Login';
 
 function DocumentPage() {
   const { auth: { isLogin } } = useSelector((states) => states);

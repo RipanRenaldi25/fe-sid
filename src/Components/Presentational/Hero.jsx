@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import { GoArrowRight } from 'react-icons/go';
-import { Link } from 'react-router-dom';
 
 function Hero({ content, img, directTo }) {
   function scrollToSection(sectionId) {
