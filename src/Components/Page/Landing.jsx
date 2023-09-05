@@ -20,7 +20,7 @@ function LandingPage() {
               <NavigationItem path="/home" title={<MdKeyboardDoubleArrowRight className="hover:text-black" />} />
             </button>
           </div>
-          <div className="absolute mobile:bottom-7 md:bottom-16">
+          <div className="absolute mobile:bottom-3 md:bottom-16">
             <button type="button" className="mobile:text-sm border px-10 py-3 bg-white text-black rounded-2xl font-bold text-xl hover:bg-gray-300 transition-colors">
               <Link to="/home">
                 Visit Now
@@ -30,7 +30,7 @@ function LandingPage() {
         </div>
         <div className="mobile:row-span-6 relative col-span-2 bg-yellow-200 md:row-span-3 rounded-tl-[50px] rounded-br-[50px] p-6 bg-cover bg-center text-white hover:cursor-pointer" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(${bgForest})` }} onClick={() => navigate('/profile')}>
           <p className="text-lg font-thin">Profile</p>
-          <h1 className="absolute bottom-10 text-2xl">See Our Profile</h1>
+          <h1 className="absolute mobile:bottom-4 md:bottom-10 text-2xl">See Our Profile</h1>
           <div className="text-3xl absolute top-2 right-2">
             <Link to="/profile">
               <HiMiniArrowUpRight />

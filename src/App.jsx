@@ -97,7 +97,7 @@ function App() {
                       <img src={logo} alt="logo desa" className="w-20" />
                     </Link>
                   </section>
-                  <div className="mobile:absolute mobile:left-0 mobile:right-0 mobile:top-[7.8rem] md:flex md:relative md:top-0">
+                  <div className="mobile:hidden md:flex md:relative md:top-0">
                     <NavigationBar />
                   </div>
                 </section>

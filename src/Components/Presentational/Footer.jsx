@@ -40,8 +40,8 @@ function Footer() {
             <button type="button" className="info">
               Email
             </button>
-            <button type="button" className="profile">
-              Call Us (+62)   81239839281
+            <button type="button" className="mobile:text-left profile">
+              Call Us (+62) 81239839281
             </button>
           </div>
         </section>
@@ -59,7 +59,7 @@ function Footer() {
       <section className="mb-16 after:contents[''] after:block after:w-full after:h-0.5 after:bg-[rgba(0,0,0,.2)] after:relative after:top-4">
         <p>Cicalengka Kabupaten Bandung</p>
       </section>
-      <section className="flex justify-between items-center">
+      <section className="mobile:gap-2  flex justify-between items-center">
         <div className="mobile:w-20 md:w-40">
           <img src={logo} alt={logo} />
         </div>
@@ -67,7 +67,7 @@ function Footer() {
           <NavigationBar />
         </div>
         <div>
-          <SocialMediaList sosmedList={sosmed} parentClass="flex text-3xl gap-5" />
+          <SocialMediaList sosmedList={sosmed} parentClass="mobile:text-2xl flex text-3xl gap-5" />
         </div>
       </section>
     </footer>
