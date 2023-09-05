@@ -67,6 +67,7 @@ function App() {
         sidebarOpen,
         setSidebarOpen,
         isHamburgerClicked,
+        setIsHamburgerClicked,
       }
     ), [sidebarOpen, isHamburgerClicked])}
     >
@@ -89,14 +90,14 @@ function App() {
         ) : (
           <div className="base relative app min-h-screen flex justify-center items-center">
             <article className="relative mobile:max-w-full mobile:min-h-screen mobile:overflow-x-hidden bg-primary-white bg-opacity-95 backdrop-blur-sm md:min-h-[calc(100vh-100px)] md:max-h-[calc(100vh-100px)] md:max-w-[calc(100%-150px)] md:min-w-[calc(100%-100px)] rounded-xl md:overflow-auto">
-              <header className="mobile:relative mobile:bg-sidebar-color mobile:top-0 mobile:z-10 md:bg-primary-white md:relative flex md:justify-between mobile:items-center md:border-[3px] md:border-dotted md:border-spacing-10 md:rounded-xl">
+              <header className=" mobile:bg-sidebar-color mobile:top-0 mobile:z-10 md:bg-primary-white relative flex md:justify-between mobile:items-center md:border-[3px] md:border-dotted md:border-spacing-10 md:rounded-xl">
                 <section className="flex items-center p-8 gap-5">
                   <section className="logo ">
                     <Link to="/">
                       <img src={logo} alt="logo desa" className="w-20" />
                     </Link>
                   </section>
-                  <div className="mobile:hidden md:block">
+                  <div className="mobile:absolute mobile:left-0 mobile:right-0 mobile:top-[7.8rem] md:flex md:relative md:top-0">
                     <NavigationBar />
                   </div>
                 </section>
