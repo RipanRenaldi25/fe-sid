@@ -6,7 +6,6 @@ import { toggleAccordionACtioncreator } from '../../states';
 function FAQ() {
   const { accordion: accordions } = useSelector((states) => states);
   const dispatch = useDispatch();
-  console.log({ accordions });
   const onClickAccordionHandler = (index) => {
     dispatch(toggleAccordionACtioncreator(index));
   };

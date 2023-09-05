@@ -6,9 +6,9 @@
 }
 
 .base {
-    background-image: url('./assets/images/main-bg.jpg');
+    background-image: url('./assets/images/logo.png');
     background-position: center;
-    background-size: cover;
+    background-size: contain;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {

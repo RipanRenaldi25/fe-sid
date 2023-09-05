@@ -84,7 +84,7 @@ function App() {
           </article>
         ) : (
           <div className="base relative app min-h-screen flex justify-center items-center">
-            <article className=" relative bg-primary-white min-h-[calc(100vh-100px)] max-h-[calc(100vh-100px)] min-w-[calc(100%-150px)] rounded-xl overflow-auto">
+            <article className=" relative bg-primary-white bg-opacity-95 backdrop-blur-sm min-h-[calc(100vh-100px)] max-h-[calc(100vh-100px)] max-w-[calc(100%-150px)] min-w-[calc(100%-100px)] rounded-xl overflow-auto">
               <header className="flex justify-between border-[3px] border-dotted border-spacing-10 rounded-xl">
                 <section className="flex items-center p-8 gap-5">
                   <section className="logo">
