@@ -118,10 +118,10 @@ function UploadForm() {
 
   return (
     <section>
-      <form encType="multipart/form-data" className="w-1/3 mx-auto relative" onSubmit={onSubmit}>
+      <form encType="multipart/form-data" className="mobile:mt-10 md:mt-0 md:w-1/3 mx-auto relative" onSubmit={onSubmit}>
         <div>
           <div>
-            <header className="flex flex-col items-center mb-4">
+            <header className="mobile:justify-center flex flex-col items-center mb-4">
               <h1 className="text-xl">Upload Dokumen</h1>
               <p className="text-slate-500">Isi form di bawah untuk mengirim dokumen</p>
             </header>
