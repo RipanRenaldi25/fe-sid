@@ -13,9 +13,10 @@ import useFormInput from '../../hooks/useInput';
 import { asyncSearchRequest, changeInputSearchFormActionCreator, clearInputLoginActionCreator } from '../../states';
 import useDebounce from '../../hooks/useDebounce';
 import ProcessedInput from '../Reusable/ProcessedInput';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { clearSearchbarInput } from '../../states';
 import {AiOutlineClear} from 'react-icons/ai'
+import Table from '../Reusable/Table';
 
 
 function AdminTable({ columns, data = [], requestSearch = [] }) {
@@ -31,16 +32,6 @@ function AdminTable({ columns, data = [], requestSearch = [] }) {
       status: searchbarInput.process
     }))
   }, [debounceValue, searchbarInput.date, searchbarInput.process])
-  const {
-    getTableBodyProps, headerGroups, page, prepareRow, nextPage, previousPage, pageCount, state, canNextPage, canPreviousPage,
-  } = useTable({
-    columns,
-    data: requestSearch ? requestSearch : data, 
-    initialState: {
-      pageIndex: 0,
-    },
-  }, useSortBy, usePagination);
-  const { pageIndex } = state;
   return (
     <section className="bg-sidebar-color py-10  rounded-xl">
       <header className="px-6 mb-4 relative">
@@ -59,41 +50,7 @@ function AdminTable({ columns, data = [], requestSearch = [] }) {
           </div>
         </div>
       </header>
-      <table className="w-full table-auto">
-        <thead>
-          {headerGroups.map((headers) => (
-            <tr {...headers.getHeaderGroupProps()} className="border-b-2 border-slate-400">
-              {headers.headers.map((header) => (
-                <th {...header.getHeaderProps(header.getSortByToggleProps())} className="relative text-left px-4 py-2 font-semibold text-slate-600 w-[40px]">
-                  {header.render('Header')}
-                  {header.Header === 'Action' ? null : header.isSorted ? (header.isSortedDesc ? (
-                    <span className="absolute top-1/2 -translate-y-1/2 text-xl mx-2"><TiArrowSortedUp /></span>
-                  ) : (
-                    <span className="absolute top-1/2 -translate-y-1/2 text-xl mx-2"><TiArrowSortedDown /></span>
-                  )) : (
-                    <span className="absolute top-1/2 -translate-y-1/2 mx-2"><TiArrowUnsorted /></span>
-                  )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps}>
-          {page.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps} className="odd:bg-primary-white">
-                {row.cells.map((cell) => (
-                  <td className="px-8 py-2 border-b-2 border-slate-200">{cell.render('Cell')}</td>
-                ))}
-              </tr>
-            );
-          })}
-
-        </tbody>
-      </table>
-
-      <PaginateButton canNextPage={canNextPage} canPreviousPage={canPreviousPage} nextPage={nextPage} pageIndex={pageIndex} previousPage={previousPage} />
+      <Table data={requestSearch ? requestSearch : data} columns={columns}/>
     </section>
   );
 }
