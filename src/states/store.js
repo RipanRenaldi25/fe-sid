@@ -11,6 +11,6 @@ export const store = configureStore({
     form: formReducer,
     auth: authenticationReducer,
     requests: requestReducer,
-    users: userReducer
+    users: userReducer,
   },
 });

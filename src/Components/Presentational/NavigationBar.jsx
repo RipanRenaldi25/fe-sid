@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import NavigationLists from './NavigationLists';
 
 const navList = [
@@ -21,9 +22,16 @@ const navList = [
 ];
 
 function NavigationBar() {
+  const { auth: { isLogin } } = useSelector((states) => states);
   return (
     <nav>
-      <NavigationLists navList={navList} />
+      {
+        isLogin ? (
+          <NavigationLists navList={navList} />
+        ) : (
+          <NavigationLists navList={navList.slice(0, 3)} />
+        )
+      }
     </nav>
   );
 }

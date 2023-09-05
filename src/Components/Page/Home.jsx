@@ -4,6 +4,7 @@ import bgForest from '../../assets/images/forest-2.png';
 import Card from '../Reusable/Card';
 import CardLists from '../Presentational/CardLists';
 import pedestrian from '../../assets/images/pedestrian.svg';
+import kepalaDesa from '../../assets/images/kepaladesa.jpeg';
 import CardImage from '../Presentational/CardImage';
 import JohnDoe from '../../assets/images/john-doe.jpg';
 import Footer from '../Presentational/Footer';
@@ -59,9 +60,9 @@ function HomePage() {
       <section className="mt-14 mb-20">
         <h1 className="text-center text-2xl mb-10 font-semibold after:contents-[''] after:block after:h-0.5 after:mt-1 after:bg-gray-400 after:mx-auto after:w-[80px]">Kepala Desa</h1>
         <section className="Card grid grid-cols-3 gap-14 place-items-center">
-          <CardImage name="John Doe" position="web dev" profileImg={JohnDoe} fbUrl="www.google.com" igUrl="www.google.com" twitterUrl="www.google.com" aos="fade-up" />
-          <CardImage name="John Doe" position="web dev" profileImg={JohnDoe} fbUrl="www.google.com" igUrl="www.google.com" twitterUrl="www.google.com" />
-          <CardImage name="John Doe" position="web dev" profileImg={JohnDoe} fbUrl="www.google.com" igUrl="www.google.com" twitterUrl="www.google.com" />
+          <div className="col-start-2">
+            <CardImage name="Endang Sutisna" position="Kepala Desa" profileImg={kepalaDesa} fbUrl="www.google.com" igUrl="www.google.com" twitterUrl="www.google.com" aos="fade-up" />
+          </div>
         </section>
       </section>
       <Footer />

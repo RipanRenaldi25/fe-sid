@@ -1,13 +1,13 @@
 import React from 'react';
-import propTypes from 'prop-types';
+import propTypes, { string } from 'prop-types';
 import { BsFacebook, BsInstagram, BsTwitter } from 'react-icons/bs';
 import SocialMedia from '../Reusable/SocialMedia';
 
 function CardImage({
-  profileImg, name, position, fbUrl, igUrl, twitterUrl,
+  profileImg, name, position, fbUrl, igUrl, twitterUrl, parrentStyle,
 }) {
   return (
-    <section className="relative card-image w-[300px] flex flex-col justify-center items-center h-[300px] border before:absolute before:bg-gradient-to-tr before:from-primary-black before:to-secondary-black before:h-[calc(50%-30px)] before:w-full before:top-0 before:-z-1 rounded-xl overflow-hidden shadow-lg gap-4">
+    <section className={`relative card-image w-[300px] flex flex-col justify-center items-center h-[300px] border before:absolute before:bg-gradient-to-tr before:from-primary-black before:to-secondary-black before:h-[calc(50%-30px)] before:w-full before:top-0 before:-z-1 rounded-xl overflow-hidden shadow-lg gap-4 ${parrentStyle}}`}>
       <div className="profile image z-10 bg-cover bg-center w-full flex justify-center items-center rounded-full">
         <img src={profileImg} alt={name} className="w-[100px] rounded-full" />
       </div>
@@ -31,7 +31,7 @@ CardImage.propTypes = {
   fbUrl: propTypes.string,
   igUrl: propTypes.string,
   twitterUrl: propTypes.string,
-  aos: propTypes.string,
+  parrentStyle: string,
 };
 
 export default CardImage;
