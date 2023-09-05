@@ -17,7 +17,8 @@ export {
   asyncGetSpecificRequest,
   asyncDownloadDocuments,
   asyncChangeStatusDocument,
-  asyncSearchRequest
+  asyncSearchRequest,
+  updateSpecificRequestActionCreator
 } from './requests/requestAction';
 
 export { setUserActionCreator, setIsLogin, logoutUser } from './Authentication/authenticationAction';

@@ -4,7 +4,7 @@ import {
   TiArrowSortedDown, TiArrowSortedUp, TiArrowUnsorted,
 } from 'react-icons/ti';
 import { FiSearch } from 'react-icons/fi';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { CiCalendarDate } from 'react-icons/ci';
 import SearchBar from '../Reusable/SearchBar';
 import PaginateButton from './PaginateButton';
@@ -18,11 +18,10 @@ import { clearSearchbarInput } from '../../states';
 import {AiOutlineClear} from 'react-icons/ai'
 
 
-function AdminTable({ columns, data = [] }) {
+function AdminTable({ columns, data = [], requestSearch = [] }) {
   const [searchbarInput, { onChangeInputHandler }] = useFormInput('searchForm', {
     onChangeInput: changeInputSearchFormActionCreator, onClearAction: clearInputLoginActionCreator,
   });
-  const {requests: {requestSearched}} = useSelector(states => states);
   const dispatch = useDispatch();
   const debounceValue = useDebounce(searchbarInput.name, 400);
   useEffect(() => {
@@ -36,13 +35,12 @@ function AdminTable({ columns, data = [] }) {
     getTableBodyProps, headerGroups, page, prepareRow, nextPage, previousPage, pageCount, state, canNextPage, canPreviousPage,
   } = useTable({
     columns,
-    data: requestSearched ? requestSearched : data,
+    data: requestSearch ? requestSearch : data, 
     initialState: {
       pageIndex: 0,
     },
   }, useSortBy, usePagination);
   const { pageIndex } = state;
-  console.log({requestSearched});
   return (
     <section className="bg-sidebar-color py-10  rounded-xl">
       <header className="px-6 mb-4 relative">

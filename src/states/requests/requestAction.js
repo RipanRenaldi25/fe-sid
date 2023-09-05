@@ -31,12 +31,12 @@ export const asyncGetSpecificRequest = (requestId) => async (dispatch) => {
   }
 };
 
-export const updateSpecificRequestActionCreator = (id, newData) => {
+export const updateSpecificRequestActionCreator = (id, processed) => {
   return {
     type: REQUESTS_TYPE.updateSpecificRequest,
     payload: {
       id,
-      newData
+      processed
     }
   }
 }
@@ -71,6 +71,7 @@ export const asyncDownloadDocuments = (requestId) => async (dispatch) => {
     URL.revokeObjectURL(url);
     dispatch(asyncChangeStatusDocument(requestId, 'processed'));  
     await deleteCompressedDocument(); 
+    dispatch(updateSpecificRequestActionCreator(requestId, 'procesesd'));
   } catch (e) {
     console.log(e);
   }
@@ -81,8 +82,7 @@ export const asyncDownloadDocuments = (requestId) => async (dispatch) => {
 export const asyncChangeStatusDocument = (requestId, status) => async (dispatch) => {
   try{
     const response = await changeStatusProcess(requestId, status);
-    const {data} = response.data;
-    dispatch(updateSpecificRequestActionCreator(requestId, data));
+    dispatch(updateSpecificRequestActionCreator(requestId, status));
   }catch(e){
     console.log(e);
   }
@@ -105,7 +105,6 @@ export const asyncSearchRequest = ({keyword, date, status}) => {
     try{
       const { data: response } = await searchRequest({keyword, date, status});
       dispatch(setRequestSearch(response.data));
-      console.log({response});
     }catch(e){
       console.log(e);
     }

@@ -34,8 +34,9 @@ function AdminPage() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { auth: { isLogin }, requests: { requests } } = useSelector((states) => states);
-  const data = useMemo(() => requests, [requests]);
+  const { auth: { isLogin }, requests: { requests, requestSearched: req } } = useSelector((states) => states);
+  const data = useMemo(() => requests, [requests, req]);
+  const requestSearch = useMemo(() => req, [req, requests]);
   const columns = [
     {
       accessor: 'requestedBy[0].name',
@@ -120,7 +121,7 @@ function AdminPage() {
         </div>
       </aside>
       <section className={`relative ${sidebarOpen ? 'left-[250px] w-[calc(100%-250px)]' : 'left-[88px] w-[calc(100%-88px)]'} transition-all h-screen p-5`}>
-        <AdminTable columns={memoizeColumns} data={data} />
+        <AdminTable columns={memoizeColumns} requestSearch={requestSearch} data={data}/>
       </section>
     </article>
   );

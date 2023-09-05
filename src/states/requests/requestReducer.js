@@ -22,9 +22,18 @@ const requestReducer = (state = initialState, action = {}) => {
     case REQUESTS_TYPE.updateSpecificRequest:
       return {
         ...state,
-        requests: state.requests.map((request) => ({
+        requests: state.requests.map((request) => {
+          if(request.request_id === action.payload.id) {
+            return {
+              ...request,
+              processed: action.payload.processed
+            };
+          }
+          return request;
+        }),
+        requestSearched : state.requestSearched.map(request => ({
           ...request,
-          processed: request.request_id === action.payload.id ? action.payload.newData.processed : request.processed
+          processed: request.request_id === action.payload.id ? action.payload.processed : request.processed
         }))
       }
     case REQUESTS_TYPE.setRequestSearch:
