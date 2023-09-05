@@ -35,6 +35,10 @@ const selectOptions = [
     title: 'Surat Pindah',
     value: 'surat_pindah',
   },
+  {
+    title: 'Surat Serba Guna',
+    value: 'surat_serba_guna',
+  },
 ];
 
 function UploadForm() {
@@ -79,6 +83,7 @@ function UploadForm() {
             setUploading(true);
             const percentage = Math.round((progressEvent.loaded * 100) / progressEvent.total);
             setPercent(percentage);
+            setUploading(false);
           },
         });
         alert('document berhasil di upload');
@@ -91,6 +96,20 @@ function UploadForm() {
       }
     }
   };
+
+  useEffect(() => {
+    let interval;
+    if (percent === 100) {
+      interval = setTimeout(() => {
+        alert('document berhasil di upload');
+        setFiles([]);
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [percent]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
