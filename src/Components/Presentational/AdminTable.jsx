@@ -1,20 +1,19 @@
 import { arrayOf, object } from 'prop-types';
-import {
-  TiArrowSortedDown} from 'react-icons/ti';
+import { TiArrowSortedDown } from 'react-icons/ti';
 import { FiSearch } from 'react-icons/fi';
 import React, { useEffect } from 'react';
 import { CiCalendarDate } from 'react-icons/ci';
+import { useDispatch } from 'react-redux';
+import { AiOutlineClear } from 'react-icons/ai';
 import SearchBar from '../Reusable/SearchBar';
 import DateInput from '../Reusable/DateInput';
 import useFormInput from '../../hooks/useInput';
-import { asyncSearchRequest, changeInputSearchFormActionCreator, clearInputLoginActionCreator } from '../../states';
+import {
+  asyncSearchRequest, changeInputSearchFormActionCreator, clearInputLoginActionCreator, clearSearchbarInput,
+} from '../../states';
 import useDebounce from '../../hooks/useDebounce';
 import ProcessedInput from '../Reusable/ProcessedInput';
-import { useDispatch } from 'react-redux';
-import { clearSearchbarInput } from '../../states';
-import {AiOutlineClear} from 'react-icons/ai'
 import Table from '../Reusable/Table';
-
 
 function AdminTable({ columns, data = [], requestSearch = [] }) {
   const [searchbarInput, { onChangeInputHandler }] = useFormInput('searchForm', {
@@ -26,20 +25,20 @@ function AdminTable({ columns, data = [], requestSearch = [] }) {
     dispatch(asyncSearchRequest({
       keyword: debounceValue,
       date: searchbarInput.date,
-      status: searchbarInput.process
-    }))
-  }, [debounceValue, searchbarInput.date, searchbarInput.process])
+      status: searchbarInput.process,
+    }));
+  }, [debounceValue, searchbarInput.date, searchbarInput.process]);
   return (
     <section className="bg-sidebar-color py-10  rounded-xl">
       <header className="px-6 mb-4 relative">
         <h1 className="font-bold text-xl ml-6 mb-8">Uploaded Form</h1>
         <div className="flex items-center gap-10">
-          <SearchBar icon={<FiSearch />} placeholder="Cari berdasarkan nama" onChangeHandler={onChangeInputHandler} value={searchbarInput.name} />
+          <SearchBar icon={<FiSearch />} placeholder="Cari berdasarkan nama" onChangeHandler={onChangeInputHandler} value={searchbarInput.name} name="name" />
           <DateInput icon={<CiCalendarDate />} value={searchbarInput.date} onChangeHandler={onChangeInputHandler} />
           <ProcessedInput icon={<TiArrowSortedDown />} value={searchbarInput.process} onChangeHandler={onChangeInputHandler} />
           <div className=" hover:bg-purple-color hover:text-white flex items-center rounded-xl overflow-hidden shadow-lg border cursor-pointer relative transition-colors" onClick={() => dispatch(clearSearchbarInput())}>
             <div>
-              <button type='button' className='py-3 px-5 font-thin'>Clear</button>
+              <button type="button" className="py-3 px-5 font-thin">Clear</button>
             </div>
             <div className="flex items-center p-3 font-bold text-2xl border-l">
               <span><AiOutlineClear /></span>
@@ -47,7 +46,7 @@ function AdminTable({ columns, data = [], requestSearch = [] }) {
           </div>
         </div>
       </header>
-      <Table data={requestSearch ? requestSearch : data} columns={columns}/>
+      <Table data={requestSearch || data} columns={columns} />
     </section>
   );
 }

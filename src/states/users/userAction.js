@@ -19,6 +19,10 @@ export function getUserActionCreator(user) {
   });
 }
 
+export const clearSearchedUserActionCreator = () => ({
+  type: USER_TYPE.clearSearchedUser,
+});
+
 export const asyncGetUsers = () => async (dispatch) => {
   dispatch(setIsFetchingActionCreator(true));
   try {

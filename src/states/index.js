@@ -26,6 +26,7 @@ export {
 export {
   asyncGetUser,
   asyncGetUsers,
+  clearSearchedUserActionCreator,
 } from './users/userAction';
 
 export { setUserActionCreator, setIsLogin, logoutUser } from './Authentication/authenticationAction';

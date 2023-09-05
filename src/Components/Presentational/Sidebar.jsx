@@ -4,7 +4,7 @@ import { FaBook } from 'react-icons/fa';
 import {
   MdDashboardCustomize, MdKeyboardArrowLeft, MdKeyboardArrowRight, MdManageAccounts,
 } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useDispatch } from 'react-redux';
 import SidebarList from '../Page/SidebarList';
@@ -16,19 +16,21 @@ function Sidebar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { sidebarOpen, setSidebarOpen } = useContext(sidebarContext);
+  const location = useLocation();
+  console.log(location);
 
   const [sidebarList, setSidebarList] = useState([
     {
       title: 'Documents',
       path: '/dashboard',
       icon: <FaBook />,
-      isActive: true,
+      isActive: location.pathname === '/dashboard',
     },
     {
       title: 'Account',
       path: '/dashboard/account',
       icon: <MdManageAccounts />,
-      isActive: false,
+      isActive: location.pathname === '/dashboard/account',
     }]);
   const onClickSidebarHandler = (path) => {
     setSidebarList((prevState) => (
