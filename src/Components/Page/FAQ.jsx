@@ -10,10 +10,10 @@ function FAQ() {
     dispatch(toggleAccordionACtioncreator(index));
   };
   return (
-    <article className="mt-10">
-      <header className="flex justify-center items-center flex-col gap-2">
-        <h1 className="text-4xl font-semibold">FAQs</h1>
-        <h2 className="text-3xl font-thin">Frequently Asked Questions</h2>
+    <article className="mobile:mt-0 mobile:w-screen md:mt-10 md:w-full">
+      <header className="flex justify-center items-center flex-col gap-2 mobile:mt-10">
+        <h1 className="mobile:text-2xl md:text-4xl font-semibold">FAQs</h1>
+        <h2 className="mobile:text-xl md:text-3xl font-thin">Frequently Asked Questions</h2>
         <p className="text-slate-500">Have Question? We`re here to help</p>
       </header>
       <section className="accordion flex flex-col justify-center items-center gap-4 mt-6">

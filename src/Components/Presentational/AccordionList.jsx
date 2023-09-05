@@ -1,7 +1,6 @@
 import React from 'react';
-import { arrayOf, object } from 'prop-types';
+import { arrayOf, object, func } from 'prop-types';
 import Accordion from '../Reusable/Accordion';
-import { func } from 'prop-types';
 
 function AccordionList({ accordionList, onClickHandler }) {
   return (
@@ -21,7 +20,7 @@ function AccordionList({ accordionList, onClickHandler }) {
 
 AccordionList.propTypes = {
   accordionList: arrayOf(object).isRequired,
-  onClickHandler: func.isRequired
+  onClickHandler: func.isRequired,
 };
 
 export default AccordionList;
