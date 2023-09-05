@@ -1,13 +1,10 @@
 import { arrayOf, object } from 'prop-types';
-import { useTable, usePagination, useSortBy } from 'react-table';
 import {
-  TiArrowSortedDown, TiArrowSortedUp, TiArrowUnsorted,
-} from 'react-icons/ti';
+  TiArrowSortedDown} from 'react-icons/ti';
 import { FiSearch } from 'react-icons/fi';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect } from 'react';
 import { CiCalendarDate } from 'react-icons/ci';
 import SearchBar from '../Reusable/SearchBar';
-import PaginateButton from './PaginateButton';
 import DateInput from '../Reusable/DateInput';
 import useFormInput from '../../hooks/useInput';
 import { asyncSearchRequest, changeInputSearchFormActionCreator, clearInputLoginActionCreator } from '../../states';

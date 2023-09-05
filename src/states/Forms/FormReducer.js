@@ -18,6 +18,9 @@ const initialState = {
     date: '',
     process: '',
   },
+  searchFormAccount: {
+    nik: ''
+  }
 };
 
 const formReducer = (state = initialState, action = {}) => {
@@ -82,6 +85,16 @@ const formReducer = (state = initialState, action = {}) => {
             name: '',
             date: '',
             process: ''
+          },
+          searchFormAccount: {
+            nik: ''
+          }
+        }
+      case FormActionType.changeInputNikBar: 
+        return {
+          ...state,
+          searchFormAccount: {
+            [action.payload.key]: action.payload.value
           }
         }
     default:

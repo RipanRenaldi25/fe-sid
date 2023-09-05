@@ -160,3 +160,22 @@ export const searchRequest = async ({keyword, date, status}) => {
 
     return response;
 }
+
+export const getUsers = async () => {
+  const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/users`, {
+    headers: {
+      Authorization: `BEARER ${getAccessToken()}`
+    }
+  });
+
+  return response;
+};
+
+export const getUserByNIK = async (nik) => {
+  const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/users/user/${nik}`, {
+    headers: {
+      Authorization: `BEARER ${getAccessToken()}`
+    }
+  });
+  return response;
+}

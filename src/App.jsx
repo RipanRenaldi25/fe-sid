@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import {
   Link, Route, Routes, useNavigate,
@@ -19,12 +19,14 @@ import { getAccessToken, removeAccessToken, removeRefreshToken } from './utils/u
 import {
   logoutUser, setIsLogin, setUserActionCreator,
 } from './states';
-import Test from './Components/Page/test';
-
+import AccountPage from './Components/Page/AccountPage';
+import Sidebar from './Components/Presentational/Sidebar';
+import SidebarContext from './Context/sidebarContext';
 function App() {
   const { auth: { user, isLogin } } = useSelector((states) => states);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState()
 
   useEffect(() => {
     const userLogedIn = getAccessToken({ key: 'USER' });
@@ -32,74 +34,86 @@ function App() {
       dispatch(setIsLogin(true));
       dispatch(setUserActionCreator({ ...getAccessToken({ key: 'USER' }) }));
     }
-  }, []);
+    if(user.role === 'user'){
+      navigate('/');
+      return;
+    }
+  }, [user.role]);
   return (
-    <div>
-      {isLogin && user.role === 'admin' ? (
-        <Routes>
-          <Route path="/*" Component={AdminPage} />
-          <Route path="/dashboard" Component={AdminPage} />
-          <Route path="/dashboard/account" Component={Test} />
-        </Routes>
-      ) : (
-        <div className="base relative app min-h-screen flex justify-center items-center">
-          <article className=" relative bg-primary-white min-h-[calc(100vh-100px)] max-h-[calc(100vh-100px)] min-w-[calc(100%-150px)] rounded-xl overflow-auto">
-            <header className="flex justify-between border-[3px] border-dotted border-spacing-10 rounded-xl">
-              <section className="flex items-center p-8 gap-5">
-                <section className="logo">
-                  <Link to="/">
-                    <img src={logo} alt="logo desa" className="w-20" />
-                  </Link>
+    <SidebarContext.Provider value={{
+      sidebarOpen: sidebarOpen,
+      setSidebarOpen: setSidebarOpen
+    }} >
+      <div>
+        {isLogin && user.role === 'admin' ? (
+              <article className="Admin Page relative bg-bg-color min-h-screen">
+                <Sidebar />
+                <Routes>
+                  <Route path="/dashboard" Component={AdminPage} />
+                  <Route path="/dashboard/account" Component={AccountPage} />
+                  <Route path="/*" Component={AdminPage} />
+                </Routes>
+            </article>
+        ) : (
+          <div className="base relative app min-h-screen flex justify-center items-center">
+            <article className=" relative bg-primary-white min-h-[calc(100vh-100px)] max-h-[calc(100vh-100px)] min-w-[calc(100%-150px)] rounded-xl overflow-auto">
+              <header className="flex justify-between border-[3px] border-dotted border-spacing-10 rounded-xl">
+                <section className="flex items-center p-8 gap-5">
+                  <section className="logo">
+                    <Link to="/">
+                      <img src={logo} alt="logo desa" className="w-20" />
+                    </Link>
+                  </section>
+                  <NavigationBar />
                 </section>
-                <NavigationBar />
-              </section>
-              <section className="flex p-8">
-                {isLogin ? (
-                  <div className="flex items-center gap-4">
-                    <span className="text-2xl flex items-center"><CgProfile /></span>
-                    <h1 className="text-xl">{user.username}</h1>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        dispatch(setIsLogin(false));
-                        dispatch(logoutUser());
-                        removeAccessToken({ key: 'ACCESS_TOKEN' });
-                        removeAccessToken({ key: 'USER' });
-                        removeRefreshToken({ key: 'REFRESH_TOKEN' });
-                      }}
-                    >
-                      Logout
+                <section className="flex p-8">
+                  {isLogin ? (
+                    <div className="flex items-center gap-4">
+                      <span className="text-2xl flex items-center"><CgProfile /></span>
+                      <h1 className="text-xl">{user.username}</h1>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          dispatch(setIsLogin(false));
+                          dispatch(logoutUser());
+                          removeAccessToken({ key: 'ACCESS_TOKEN' });
+                          removeAccessToken({ key: 'USER' });
+                          removeRefreshToken({ key: 'REFRESH_TOKEN' });
+                        }}
+                      >
+                        Logout
 
-                    </button>
-                  </div>
-                ) : (
-                  <div className="bg-gray-200 flex rounded-xl justify-around w-60 items-center overflow-hidden px-2 py-0">
-                    <button type="button" className="font-bold text-sm h-[80%] hover:bg-gray-400 hover:text-primary-white rounded-xl transition-colors px-5 py-0" onClick={() => navigate('/login')}>
-                      LOG IN
-                    </button>
-                    <button type="button" className="text-sm text-white bg-primary-black h-[80%] rounded-xl px-10" onClick={() => navigate('/signup')}>
-                      SIGN UP
-                    </button>
-                  </div>
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="bg-gray-200 flex rounded-xl justify-around w-60 items-center overflow-hidden px-2 py-0">
+                      <button type="button" className="font-bold text-sm h-[80%] hover:bg-gray-400 hover:text-primary-white rounded-xl transition-colors px-5 py-0" onClick={() => navigate('/login')}>
+                        LOG IN
+                      </button>
+                      <button type="button" className="text-sm text-white bg-primary-black h-[80%] rounded-xl px-10" onClick={() => navigate('/signup')}>
+                        SIGN UP
+                      </button>
+                    </div>
 
-                )}
-              </section>
-            </header>
-            <main className="relative w-full h-full">
-              <Routes>
-                <Route path="/" Component={LandingPage} />
-                <Route path="/signup" Component={RegisterPage} />
-                <Route path="/login" Component={Login} />
-                <Route path="/home" Component={HomePage} />
-                <Route path="/faq" Component={FAQ} />
-                <Route path="/profile" Component={Profile} />
-                <Route path="/document" Component={DocumentPage} />
-              </Routes>
-            </main>
-          </article>
-        </div>
-      )}
-    </div>
+                  )}
+                </section>
+              </header>
+              <main className="relative w-full h-full">
+                <Routes>
+                  <Route path="/*" Component={LandingPage} />
+                  <Route path="/signup" Component={RegisterPage} />
+                  <Route path="/login" Component={Login} />
+                  <Route path="/home" Component={HomePage} />
+                  <Route path="/faq" Component={FAQ} />
+                  <Route path="/profile" Component={Profile} />
+                  <Route path="/document" Component={DocumentPage} />
+                </Routes>
+              </main>
+            </article>
+          </div>
+        )}
+      </div>
+    </SidebarContext.Provider>
 
   );
 }

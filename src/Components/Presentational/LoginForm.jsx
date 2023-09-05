@@ -6,7 +6,6 @@ import useFormInput from '../../hooks/useInput';
 
 function LoginForm() {
   const [loginInput, { onChangeInputHandler, asyncEventHandler }] = useFormInput('loginInput', { onChangeInput: changeInputLoginActionCreator, onClearAction: clearInputLoginActionCreator, onAsyncAction: asyncLogin });
-  console.log({ loginInput });
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();

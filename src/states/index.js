@@ -10,7 +10,8 @@ export {
   asyncLogin,
   clearInputSearchBar,
   changeInputSearchFormActionCreator,
-  clearSearchbarInput
+  clearSearchbarInput,
+  changeInputNikBarActionCreator
 } from './Forms/FormAction';
 export {
   asyncGetRequests,
@@ -20,5 +21,10 @@ export {
   asyncSearchRequest,
   updateSpecificRequestActionCreator
 } from './requests/requestAction';
+
+export {
+  asyncGetUser, 
+  asyncGetUsers, 
+} from './users/userAction';
 
 export { setUserActionCreator, setIsLogin, logoutUser } from './Authentication/authenticationAction';

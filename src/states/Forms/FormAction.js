@@ -41,6 +41,20 @@ export const changeInputLoginActionCreator = ({ key, value }) => ({
   },
 });
 
+export const changeInputNikBarActionCreator = ({key, value}) => {
+  return {
+    type: FormActionType.changeInputNikBar,
+    payload: {
+      key,
+      value
+    }
+  }
+}
+
+export const clearInputNikBarActionCreator = () => ({
+  type: FormActionType.clearInputNikBar
+})
+
 export const clearInputLoginActionCreator = () => ({
   type: FormActionType.clearInputLoginValue,
 });
