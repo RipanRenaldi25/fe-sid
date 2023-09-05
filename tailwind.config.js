@@ -20,7 +20,7 @@ export default {
         'purple-color': '#695CFE',
       },
       screens: {
-        mobile: '500px',
+        mobile: '375px',
       },
     },
   },
