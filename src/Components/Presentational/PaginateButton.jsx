@@ -8,7 +8,7 @@ function PaginateButton({
   return (
     <section className="absolute right-8 bottom-3">
       <div className="flex w-full gap-4 items-center p-4">
-        <button type="button" className={`flex items-center bg-purple-color rounded-xl text-white ${!canPreviousPage && 'bg-gray-400'}`} disabled={!canPreviousPage} onClick={previousPage}>
+        <button type="button" className={`flex items-center  rounded-xl text-white ${canPreviousPage ? 'bg-purple-color' : 'bg-gray-400'}`} disabled={!canPreviousPage} onClick={previousPage}>
           <span className="text-2xl"><MdKeyboardArrowLeft /></span>
         </button>
         <div className="flex gap-2 items-center">
@@ -16,7 +16,7 @@ function PaginateButton({
           <span className="bg-primary-white w-8 flex items-center justify-center rounded-lg">{pageIndex + 1}</span>
           <span>of 56</span>
         </div>
-        <button type="button" className={`flex items-center bg-purple-color rounded-xl text-white ${!canNextPage && 'bg-gray-400'}`} disabled={!canNextPage} onClick={nextPage}>
+        <button type="button" className={`flex items-center ${canNextPage ? 'bg-purple-color' : 'bg-gray-400'}  rounded-xl text-white `} disabled={!canNextPage} onClick={nextPage}>
           <span className="text-2xl"><MdKeyboardArrowRight /></span>
         </button>
       </div>
