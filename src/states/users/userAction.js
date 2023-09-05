@@ -19,6 +19,13 @@ export function getUserActionCreator(user) {
   });
 }
 
+export const setUserActionCreator = (user) => ({
+  type: USER_TYPE.setUser,
+  payload: {
+    user,
+  },
+});
+
 export const clearSearchedUserActionCreator = () => ({
   type: USER_TYPE.clearSearchedUser,
 });

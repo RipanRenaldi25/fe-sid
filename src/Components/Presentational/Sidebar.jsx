@@ -17,7 +17,6 @@ function Sidebar() {
   const dispatch = useDispatch();
   const { sidebarOpen, setSidebarOpen } = useContext(sidebarContext);
   const location = useLocation();
-  console.log(location);
 
   const [sidebarList, setSidebarList] = useState([
     {

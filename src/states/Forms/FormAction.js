@@ -73,6 +73,9 @@ export const asyncRegister = ({
     if (data) {
       alert('Registrasi berhasil');
     }
+    if (role === 'admin') {
+      window.location.reload();
+    }
   } catch (e) {
     if (e.response.status === 422) {
       alert('isi form terlebih dahulu');
