@@ -16,7 +16,7 @@ function RegisterForm({ onRegisterHandler, onChangeInputHandler, registerInput }
         <TextInput title="Password" placeholder="****" type="password" value={registerInput.password} name="password" onChange={onChangeInputHandler} />
         <TextInput title="Nomor Telepon" placeholder="0812323123" type="text" value={registerInput.phoneNumber} name="phoneNumber" onChange={onChangeInputHandler} />
       </div>
-      <NavigationItem path="login" title="Already have an account? Click here!" />
+      <NavigationItem path="/login" title="Already have an account? Click here!" />
       <button type="submit" className="mt-2 w-full bg-yellow-dark rounded-md py-2 font-semibold">
         Submit
       </button>
