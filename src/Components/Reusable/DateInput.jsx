@@ -1,4 +1,4 @@
-import { func, string } from 'prop-types';
+import { func, object, string } from 'prop-types';
 import React, { useRef } from 'react';
 
 function DateInput({ icon, value, onChangeHandler }) {
@@ -26,7 +26,7 @@ function DateInput({ icon, value, onChangeHandler }) {
 }
 
 DateInput.propTypes = {
-  icon: func.isRequired,
+  icon: object.isRequired,
   value: string.isRequired,
   onChangeHandler: func.isRequired,
 };

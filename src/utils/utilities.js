@@ -131,41 +131,41 @@ export const downloadMultipleDocument = async (requestId) => {
 };
 
 export const changeStatusProcess = async (requestId, process) => {
-    const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/documents/request/${requestId}`, {
-      process
-    }, {
-      headers: {
-        Authorization: `BEARER ${getAccessToken({key: 'ACCESS_TOKEN'})}`
-      }
-    });
-    return response;
-}
+  const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/documents/request/${requestId}`, {
+    process,
+  }, {
+    headers: {
+      Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
+    },
+  });
+  return response;
+};
 
 export const deleteCompressedDocument = async () => {
   const response = await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/documents/compress`, {
     headers: {
-      Authorization: `BEARER ${getAccessToken({key: 'ACCESS_TOKEN'})}`
-    }
+      Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
+    },
   });
   return response;
-}
+};
 
-export const searchRequest = async ({keyword, date, status}) => {
-  console.log({keyword, date, status})
-    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/documents/requests/search?keyword=${keyword}&date=${date}&status=${status}`, {
-      headers: {
-        Authorization: `BEARER ${getAccessToken({key: 'ACCESS_TOKEN'})}`
-      }
-    });
+export const searchRequest = async ({ keyword, date, status }) => {
+  console.log({ keyword, date, status });
+  const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/documents/requests/search?keyword=${keyword}&date=${date}&status=${status}`, {
+    headers: {
+      Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
+    },
+  });
 
-    return response;
-}
+  return response;
+};
 
 export const getUsers = async () => {
   const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/users`, {
     headers: {
-      Authorization: `BEARER ${getAccessToken()}`
-    }
+      Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
+    },
   });
 
   return response;
@@ -174,8 +174,8 @@ export const getUsers = async () => {
 export const getUserByNIK = async (nik) => {
   const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/users/user/${nik}`, {
     headers: {
-      Authorization: `BEARER ${getAccessToken()}`
-    }
+      Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
+    },
   });
   return response;
-}
+};

@@ -1,44 +1,45 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react';
 import { CiLogout } from 'react-icons/ci';
 import { FaBook } from 'react-icons/fa';
-import { MdDashboardCustomize, MdKeyboardArrowLeft, MdKeyboardArrowRight, MdManageAccounts } from 'react-icons/md';
+import {
+  MdDashboardCustomize, MdKeyboardArrowLeft, MdKeyboardArrowRight, MdManageAccounts,
+} from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
-import SidebarList from '../Page/SidebarList';
 import { useDispatch } from 'react-redux';
+import SidebarList from '../Page/SidebarList';
 import { logoutUser, setIsLogin } from '../../states';
 import { removeAccessToken, removeRefreshToken } from '../../utils/utilities';
 import sidebarContext from '../../Context/sidebarContext';
 
 function Sidebar() {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const {sidebarOpen, setSidebarOpen} = useContext(sidebarContext);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { sidebarOpen, setSidebarOpen } = useContext(sidebarContext);
 
-    const [sidebarList, setSidebarList] = useState([
-        {
-          title: 'Documents',
-          path: '/dashboard',
-          icon: <FaBook />,
-          isActive: true,
-        },
-        {
-          title: 'Account',
-          path: '/dashboard/account',
-          icon: <MdManageAccounts />,
-          isActive: false,
-        }]);
-    const onClickSidebarHandler = (path) => {
-        setSidebarList((prevState) => (
-          prevState.map((nav) => ({
-            ...nav,
-            isActive: nav.path === path,
-          }))
-        ));
-        navigate(path);
-      };
-      console.log({sidebarList})
-      const { auth: { isLogin } } = useSelector((states) => states);
+  const [sidebarList, setSidebarList] = useState([
+    {
+      title: 'Documents',
+      path: '/dashboard',
+      icon: <FaBook />,
+      isActive: true,
+    },
+    {
+      title: 'Account',
+      path: '/dashboard/account',
+      icon: <MdManageAccounts />,
+      isActive: false,
+    }]);
+  const onClickSidebarHandler = (path) => {
+    setSidebarList((prevState) => (
+      prevState.map((nav) => ({
+        ...nav,
+        isActive: nav.path === path,
+      }))
+    ));
+    navigate(path);
+  };
+  const { auth: { isLogin } } = useSelector((states) => states);
 
   return (
     <aside className={`fixed top-0 left-0 ${sidebarOpen ? 'w-[250px]' : 'w-[88px]'} h-full bg-sidebar-color transition-all flex flex-col justify-between z-40`}>
@@ -83,7 +84,7 @@ function Sidebar() {
         </button>
       </div>
     </aside>
-  )
+  );
 }
 
-export default Sidebar
+export default Sidebar;

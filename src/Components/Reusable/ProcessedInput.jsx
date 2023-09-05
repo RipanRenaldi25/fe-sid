@@ -1,4 +1,4 @@
-import { func, string } from 'prop-types';
+import { func, object, string } from 'prop-types';
 import React from 'react';
 import SelectInput from './SelectInput';
 
@@ -35,7 +35,7 @@ function ProcessedInput({ icon, value, onChangeHandler }) {
 }
 
 ProcessedInput.propTypes = {
-  icon: func.isRequired,
+  icon: object.isRequired,
   value: string.isRequired,
   onChangeHandler: func.isRequired,
 };

@@ -1,4 +1,4 @@
-import { func, string } from 'prop-types';
+import { func, object, string } from 'prop-types';
 import React from 'react';
 
 function SearchBar({
@@ -15,7 +15,7 @@ function SearchBar({
 }
 
 SearchBar.propTypes = {
-  icon: func.isRequired,
+  icon: object.isRequired,
   placeholder: string.isRequired,
   value: string.isRequired,
   onChangeHandler: func.isRequired,

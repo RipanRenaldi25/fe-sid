@@ -1,5 +1,5 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
 const sidebarContext = createContext(true);
 
-export default sidebarContext
+export default sidebarContext;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './App.css';
 import {
   Link, Route, Routes, useNavigate,
@@ -22,11 +22,12 @@ import {
 import AccountPage from './Components/Page/AccountPage';
 import Sidebar from './Components/Presentational/Sidebar';
 import SidebarContext from './Context/sidebarContext';
+
 function App() {
   const { auth: { user, isLogin } } = useSelector((states) => states);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [sidebarOpen, setSidebarOpen] = useState()
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
     const userLogedIn = getAccessToken({ key: 'USER' });
@@ -34,26 +35,28 @@ function App() {
       dispatch(setIsLogin(true));
       dispatch(setUserActionCreator({ ...getAccessToken({ key: 'USER' }) }));
     }
-    if(user.role === 'user'){
+    if (user.role === 'user') {
       navigate('/');
-      return;
     }
   }, [user.role]);
   return (
-    <SidebarContext.Provider value={{
-      sidebarOpen: sidebarOpen,
-      setSidebarOpen: setSidebarOpen
-    }} >
+    <SidebarContext.Provider value={useMemo(() => (
+      {
+        sidebarOpen,
+        setSidebarOpen,
+      }
+    ), [sidebarOpen])}
+    >
       <div>
         {isLogin && user.role === 'admin' ? (
-              <article className="Admin Page relative bg-bg-color min-h-screen">
-                <Sidebar />
-                <Routes>
-                  <Route path="/dashboard" Component={AdminPage} />
-                  <Route path="/dashboard/account" Component={AccountPage} />
-                  <Route path="/*" Component={AdminPage} />
-                </Routes>
-            </article>
+          <article className="Admin Page relative bg-bg-color min-h-screen">
+            <Sidebar />
+            <Routes>
+              <Route path="/dashboard" Component={AdminPage} />
+              <Route path="/dashboard/account" Component={AccountPage} />
+              <Route path="/*" Component={AdminPage} />
+            </Routes>
+          </article>
         ) : (
           <div className="base relative app min-h-screen flex justify-center items-center">
             <article className=" relative bg-primary-white min-h-[calc(100vh-100px)] max-h-[calc(100vh-100px)] min-w-[calc(100%-150px)] rounded-xl overflow-auto">

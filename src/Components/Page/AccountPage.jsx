@@ -1,46 +1,47 @@
-import React, { useContext, useEffect, useMemo } from 'react'
-import sidebarContext from '../../Context/sidebarContext'
+import React, { useContext, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import sidebarContext from '../../Context/sidebarContext';
 import Table from '../Reusable/Table';
 import AdminTable from '../Presentational/AdminTable';
 import AccountTable from '../Presentational/AccountTable';
-import { useDispatch, useSelector } from 'react-redux';
 import { asyncGetUsers } from '../../states';
 
 function AccountPage() {
-  const {sidebarOpen} = useContext(sidebarContext);
-  const {requests: { isFetching }, users: { users, user }} = useSelector(states => states);
+  const { sidebarOpen } = useContext(sidebarContext);
+  const { users: { users } } = useSelector((states) => states);
   const dispatch = useDispatch();
   const columns = useMemo(() => ([
     {
       Header: 'No',
-      accessor: 'username'
+      accessor: 'username',
+      Cell: ({ row }) => (
+        <h1>{row.index + 1}</h1>
+      ),
     },
     {
       Header: 'Nama',
-      accessor: 'name'
+      accessor: 'name',
     },
     {
       Header: 'NIK',
-      accessor: 'nik'
+      accessor: 'nik',
     },
     {
       Header: 'Nomor Telepon',
-      accessor: 'phones[0].phoneNumber',
+      accessor: 'phones[0].phone_number',
     },
-    
+
   ]), []);
-  const data = useMemo(() => ([]), [])
-  console.log({users});
-  
+  const data = useMemo(() => users, []);
 
   useEffect(() => {
-    dispatch(asyncGetUsers);
-  }, [])
+    dispatch(asyncGetUsers());
+  }, []);
   return (
     <section className={`relative ${sidebarOpen ? 'left-[250px] w-[calc(100%-250px)]' : 'left-[88px] w-[calc(100%-88px)]'} transition-all h-screen p-5`}>
-      <AccountTable columns={columns} data={data}/>
+      <AccountTable columns={columns} data={data} />
     </section>
-  )
+  );
 }
 
-export default AccountPage
+export default AccountPage;

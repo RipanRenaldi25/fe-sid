@@ -1,6 +1,7 @@
-import { bool, func, string } from 'prop-types';
+import {
+  bool, func, object, string,
+} from 'prop-types';
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 function SidebarItem({
   icon, path, title, isActive, onClickSidebarHandler, sidebarOpen,
@@ -18,7 +19,7 @@ function SidebarItem({
 }
 
 SidebarItem.propTypes = {
-  icon: func.isRequired,
+  icon: object.isRequired,
   path: string.isRequired,
   title: string.isRequired,
   isActive: bool.isRequired,
