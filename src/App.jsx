@@ -19,6 +19,7 @@ import { getAccessToken, removeAccessToken, removeRefreshToken } from './utils/u
 import {
   logoutUser, setIsLogin, setUserActionCreator,
 } from './states';
+import Test from './Components/Page/test';
 
 function App() {
   const { auth: { user, isLogin } } = useSelector((states) => states);
@@ -37,6 +38,8 @@ function App() {
       {isLogin && user.role === 'admin' ? (
         <Routes>
           <Route path="/*" Component={AdminPage} />
+          <Route path="/dashboard" Component={AdminPage} />
+          <Route path="/dashboard/account" Component={Test} />
         </Routes>
       ) : (
         <div className="base relative app min-h-screen flex justify-center items-center">
