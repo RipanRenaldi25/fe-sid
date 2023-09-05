@@ -8,6 +8,7 @@ import Table from '../Reusable/Table';
 import SearchBar from '../Reusable/SearchBar';
 import useFormInput from '../../hooks/useInput';
 import {
+  ToggleOpenModal,
   changeInputNikBarActionCreator, clearSearchbarInput,
 } from '../../states';
 import useDebounce from '../../hooks/useDebounce';
@@ -24,8 +25,8 @@ function AccountTable({ data, columns }) {
       <header className="px-6 mb-4 relative">
         <h1 className="font-bold text-xl ml-6 mb-8">Accounts</h1>
         <div className="flex items-center gap-10 justify-between">
-          <SearchBar icon={<FiSearch />} placeholder="Cari berdasarkan NIK" value={nikBarInput.nik} onChangeHandler={onChangeInputHandler} style="flex-1" />
-          <div className=" hover:bg-purple-color hover:text-white flex items-center rounded-xl overflow-hidden shadow-lg border cursor-pointer relative transition-colors" onClick={() => {}}>
+          <SearchBar icon={<FiSearch />} placeholder="Cari berdasarkan NIK" value={nikBarInput.nik} onChangeHandler={onChangeInputHandler} parentStyle="flex-1" />
+          <div className=" hover:bg-purple-color hover:text-white flex items-center rounded-xl overflow-hidden shadow-lg border cursor-pointer relative transition-colors" onClick={() => dispatch(ToggleOpenModal(true))}>
             <div>
               <button type="button" className="py-3 px-5 font-thin">Tambah Akun</button>
             </div>

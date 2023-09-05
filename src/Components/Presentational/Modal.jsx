@@ -8,7 +8,7 @@ function Modal({
   children, title, onClose, isOpen,
 }) {
   return (
-    <section className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 p-10 rounded-xl w-1/3 bg-primary-white" style={{ zIndex: '60' }} hidden={!isOpen}>
+    <section className={`absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 p-10 rounded-xl w-1/3 bg-primary-white ${isOpen ? 'scale-100' : 'scale-0'} transition-transform`} style={{ zIndex: '60' }}>
       <header className="flex justify-between items-center py-2">
         <h1 className="text-xl">{title}</h1>
         <button type="button" className="" onClick={onClose}>

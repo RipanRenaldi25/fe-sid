@@ -2,10 +2,10 @@ import { func, object, string } from 'prop-types';
 import React from 'react';
 
 function SearchBar({
-  icon, placeholder, value, onChangeHandler, style,
+  icon, placeholder, value, onChangeHandler, parentStyle,
 }) {
   return (
-    <div id="search" className={`relative flex gap-4 items-center shadow-lg w-1/3 py-3 px-4 rounded-xl border-2 ${style}`}>
+    <div id="search" className={`relative flex gap-4 items-center shadow-lg w-1/3 py-3 px-4 rounded-xl border-2 ${parentStyle}`}>
       <div className="flex items-center text-xl text-slate-400">
         <span>{icon}</span>
       </div>
@@ -19,6 +19,7 @@ SearchBar.propTypes = {
   placeholder: string.isRequired,
   value: string.isRequired,
   onChangeHandler: func.isRequired,
+  parentStyle: string,
 };
 
 export default SearchBar;

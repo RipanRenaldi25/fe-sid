@@ -69,7 +69,7 @@ function App() {
       <div>
         {isLogin && user.role === 'admin' ? (
           <article className="Admin Page relative bg-bg-color min-h-screen">
-            <section className="modal">
+            <section>
               <Overlay isOpen={isOpen} onClose={() => dispatch(ToggleOpenModal(false))} />
               <ModalBody title="Tambah Akun" isOpen={isOpen} onClose={() => dispatch(ToggleOpenModal(false))}>
                 <RegisterForm onChangeInputHandler={onChangeInputHandler} onRegisterHandler={onRegisterHandler} registerInput={registerInput} />
