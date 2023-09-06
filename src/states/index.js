@@ -18,6 +18,7 @@ export {
   asyncGetRequests,
   asyncDownloadDocuments,
   asyncSearchRequest,
+  asyncChangeStatusDocument,
   updateSpecificRequestActionCreator,
 } from './requests/requestAction';
 

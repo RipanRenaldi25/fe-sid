@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, {
-  useContext, useEffect, useMemo, useState,
+  useContext, useEffect, useMemo,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {

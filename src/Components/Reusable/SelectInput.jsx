@@ -22,9 +22,9 @@ function SelectInput({
 SelectInput.propTypes = {
   options: arrayOf(object).isRequired,
   onChangeHandler: func.isRequired,
-  documentType: string.isRequired,
+  documentType: string,
   shouldIconHidden: bool,
-  name: string.isRequired,
+  name: string,
 };
 
 export default SelectInput;

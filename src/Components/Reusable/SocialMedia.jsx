@@ -11,7 +11,7 @@ function SocialMedia({ icon, url }) {
 }
 
 SocialMedia.propTypes = {
-  icon: propTypes.func.isRequired,
+  icon: propTypes.object.isRequired,
   url: propTypes.string.isRequired,
 };
 

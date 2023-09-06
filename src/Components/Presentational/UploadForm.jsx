@@ -149,7 +149,7 @@ function UploadForm() {
                     <h3>{getFileType(file.type)}</h3>
                     <div className="w-2 h-2 bg-gray-500 rounded-full" />
                     <h3>
-                      {getFileSize(5)}
+                      {getFileSize(file.size)}
                     </h3>
                   </div>
                 </div>

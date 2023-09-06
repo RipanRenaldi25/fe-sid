@@ -139,8 +139,8 @@ function Profile() {
                   </tr>
                 </thead>
                 <tbody>
-                  {dataStatis.umum.map((saranaUmum) => (
-                    <tr>
+                  {dataStatis.umum.map((saranaUmum, i) => (
+                    <tr key={i}>
                       <td className="px-2 py-1">{saranaUmum.jenis}</td>
                       <td className="px-2 py-1">{saranaUmum.satuan}</td>
                       <td className="px-2 py-1">{saranaUmum.volume}</td>
@@ -192,8 +192,8 @@ function Profile() {
                   </tr>
                 </thead>
                 <tbody>
-                  {dataStatis.pendidikan.map((dataPendidikan) => (
-                    <tr>
+                  {dataStatis.pendidikan.map((dataPendidikan, i) => (
+                    <tr key={i}>
                       <td>{dataPendidikan.instansi}</td>
                       <td>{dataPendidikan.jumlah}</td>
                       <td>{dataPendidikan.tenaga}</td>
@@ -215,7 +215,7 @@ function Profile() {
                 </thead>
                 <tbody>
                   {dataStatis.kesehatan.map((dataKesehatan, i) => (
-                    <tr>
+                    <tr key={i}>
                       <td>{i + 1}</td>
                       <td>{dataKesehatan.nama}</td>
                       <td>{dataKesehatan.jumlah}</td>
