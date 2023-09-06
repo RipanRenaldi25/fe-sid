@@ -16,9 +16,7 @@ export {
 } from './Forms/FormAction';
 export {
   asyncGetRequests,
-  asyncGetSpecificRequest,
   asyncDownloadDocuments,
-  asyncChangeStatusDocument,
   asyncSearchRequest,
   updateSpecificRequestActionCreator,
 } from './requests/requestAction';

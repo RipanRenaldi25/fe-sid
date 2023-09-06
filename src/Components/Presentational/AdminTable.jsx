@@ -54,6 +54,7 @@ function AdminTable({ columns, data = [], requestSearch = [] }) {
 AdminTable.propTypes = {
   columns: arrayOf(object).isRequired,
   data: arrayOf(object).isRequired,
+  requestSearch: arrayOf(object),
 };
 
 export default AdminTable;

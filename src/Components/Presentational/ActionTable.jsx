@@ -20,7 +20,8 @@ function ActionTable({ id, downloadAction, completedStatusAction }) {
 
 ActionTable.propTypes = {
   id: string.isRequired,
-  action: func.isRequired,
+  downloadAction: func.isRequired,
+  completedStatusAction: func.isRequired,
 };
 
 export default ActionTable;

@@ -82,7 +82,6 @@ export const logout = async (dispatch) => {
   dispatch(setIsLogin(false));
   dispatch(logoutUser());
   try {
-    1;
     await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/authentications/${getRefreshToken({ key: 'REFRESH_TOKEN' })}`);
   } catch (e) {
     console.log(e);
@@ -150,7 +149,6 @@ export const deleteCompressedDocument = async () => {
 };
 
 export const searchRequest = async ({ keyword, date, status }) => {
-  console.log({ keyword, date, status });
   const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/documents/requests/search?keyword=${keyword}&date=${date}&status=${status}`, {
     headers: {
       Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,

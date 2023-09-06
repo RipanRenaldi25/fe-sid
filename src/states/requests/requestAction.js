@@ -1,4 +1,6 @@
-import { changeStatusProcess, deleteCompressedDocument, downloadMultipleDocument, getRequests, getSpecificRequest, searchRequest } from '../../utils/utilities';
+import {
+  changeStatusProcess, deleteCompressedDocument, downloadMultipleDocument, getRequests, searchRequest,
+} from '../../utils/utilities';
 import REQUESTS_TYPE from './RequestsType';
 
 export const getRequestsActionCreator = (requests) => ({
@@ -22,41 +24,35 @@ export const getSpecificRequestActionCreator = (request) => ({
   },
 });
 
-export const asyncGetSpecificRequest = (requestId) => async (dispatch) => {
+export const updateSpecificRequestActionCreator = (id, processed) => ({
+  type: REQUESTS_TYPE.updateSpecificRequest,
+  payload: {
+    id,
+    processed,
+  },
+});
+
+export const setRequestSearch = (request) => ({
+  type: REQUESTS_TYPE.setRequestSearch,
+  payload: {
+    request,
+  },
+});
+
+export const removeSearchRequest = () => ({
+  type: REQUESTS_TYPE.removeSetRequestSearch,
+});
+
+// ----------------------------------------------------------------------------------- //
+
+export const asyncChangeStatusDocument = (requestId, status) => async (dispatch) => {
   try {
-    const { data } = await getSpecificRequest(requestId);
-    console.log(data);
+    await changeStatusProcess(requestId, status);
+    dispatch(updateSpecificRequestActionCreator(requestId, status));
   } catch (e) {
     console.log(e);
   }
 };
-
-export const updateSpecificRequestActionCreator = (id, processed) => {
-  return {
-    type: REQUESTS_TYPE.updateSpecificRequest,
-    payload: {
-      id,
-      processed
-    }
-  }
-}
-
-export const setRequestSearch = (request) =>  {
-  return {
-    type: REQUESTS_TYPE.setRequestSearch,
-    payload: {
-      request
-    }
-  }
-}
-
-export const removeSearchRequest = () => {
-  return {
-    type: REQUESTS_TYPE.removeSetRequestSearch,
-  }
-}
-
-// ----------------------------------------------------------------------------------- //
 
 export const asyncDownloadDocuments = (requestId) => async (dispatch) => {
   try {
@@ -66,27 +62,16 @@ export const asyncDownloadDocuments = (requestId) => async (dispatch) => {
 
     const a = document.createElement('a');
     a.href = url;
-    a.download=`doc-${requestId}.zip`
+    a.download = `doc-${requestId}.zip`;
     a.click();
     URL.revokeObjectURL(url);
-    dispatch(asyncChangeStatusDocument(requestId, 'processed'));  
-    await deleteCompressedDocument(); 
+    dispatch(asyncChangeStatusDocument(requestId, 'processed'));
+    await deleteCompressedDocument();
     dispatch(updateSpecificRequestActionCreator(requestId, 'procesesd'));
   } catch (e) {
     console.log(e);
   }
 };
-
-
-
-export const asyncChangeStatusDocument = (requestId, status) => async (dispatch) => {
-  try{
-    const response = await changeStatusProcess(requestId, status);
-    dispatch(updateSpecificRequestActionCreator(requestId, status));
-  }catch(e){
-    console.log(e);
-  }
-}
 
 export const asyncGetRequests = () => async (dispatch) => {
   dispatch(setIsFetchingActionCreator(true));
@@ -100,13 +85,11 @@ export const asyncGetRequests = () => async (dispatch) => {
   dispatch(setIsFetchingActionCreator(false));
 };
 
-export const asyncSearchRequest = ({keyword, date, status}) => {
-  return async (dispatch) => {
-    try{
-      const { data: response } = await searchRequest({keyword, date, status});
-      dispatch(setRequestSearch(response.data));
-    }catch(e){
-      console.log(e);
-    }
+export const asyncSearchRequest = ({ keyword, date, status }) => async (dispatch) => {
+  try {
+    const { data: response } = await searchRequest({ keyword, date, status });
+    dispatch(setRequestSearch(response.data));
+  } catch (e) {
+    console.log(e);
   }
-}
+};

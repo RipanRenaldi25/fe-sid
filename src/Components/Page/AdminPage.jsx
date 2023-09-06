@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, {
+  useContext, useEffect, useMemo, useState,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  asyncGetRequests, asyncDownloadDocuments, asyncChangeStatusDocument
+  asyncGetRequests, asyncDownloadDocuments, asyncChangeStatusDocument,
 } from '../../states';
 import AdminTable from '../Presentational/AdminTable';
 import CreatedColumn from '../Presentational/CreatedColumnTable';
@@ -32,11 +34,11 @@ function AdminPage() {
     {
       accessor: 'request_id',
       Header: 'Action',
-      Cell: ({ row }) => ActionTable({ id: row.original.request_id, downloadAction: asyncDownloadDocuments,  completedStatusAction: asyncChangeStatusDocument}),
+      Cell: ({ row }) => ActionTable({ id: row.original.request_id, downloadAction: asyncDownloadDocuments, completedStatusAction: asyncChangeStatusDocument }),
     },
   ];
   const memoizeColumns = useMemo(() => columns, []);
-  const {sidebarOpen} = useContext(sidebarContext);
+  const { sidebarOpen } = useContext(sidebarContext);
 
   const dispatch = useDispatch();
 

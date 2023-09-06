@@ -4,7 +4,7 @@ const initialState = {
   isFetching: false,
   error: '',
   requests: [],
-  requestSearched: []
+  requestSearched: [],
 };
 
 const requestReducer = (state = initialState, action = {}) => {
@@ -23,29 +23,29 @@ const requestReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         requests: state.requests.map((request) => {
-          if(request.request_id === action.payload.id) {
+          if (request.request_id === action.payload.id) {
             return {
               ...request,
-              processed: action.payload.processed
+              processed: action.payload.processed,
             };
           }
           return request;
         }),
-        requestSearched : state.requestSearched.map(request => ({
+        requestSearched: state.requestSearched.map((request) => ({
           ...request,
-          processed: request.request_id === action.payload.id ? action.payload.processed : request.processed
-        }))
-      }
+          processed: request.request_id === action.payload.id ? action.payload.processed : request.processed,
+        })),
+      };
     case REQUESTS_TYPE.setRequestSearch:
       return {
         ...state,
-        requestSearched: [...action.payload.request]
-      }
+        requestSearched: [...action.payload.request],
+      };
     case REQUESTS_TYPE.removeSetRequestSearch:
       return {
         ...state,
-        requestSearched: []
-      }
+        requestSearched: [],
+      };
     default:
       return state;
   }
