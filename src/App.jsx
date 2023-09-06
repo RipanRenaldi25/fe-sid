@@ -92,9 +92,9 @@ function App() {
             <article className="relative mobile:max-w-full mobile:min-h-screen mobile:overflow-x-hidden bg-primary-white bg-opacity-95 backdrop-blur-sm md:min-h-[calc(100vh-100px)] md:max-h-[calc(100vh-100px)] md:max-w-[calc(100%-150px)] md:min-w-[calc(100%-100px)] rounded-xl md:overflow-auto">
               <header className=" mobile:bg-sidebar-color mobile:top-0 mobile:z-10 md:bg-primary-white relative flex md:justify-between mobile:items-center md:border-[3px] md:border-dotted md:border-spacing-10 md:rounded-xl">
                 <section className="flex items-center p-8 gap-5">
-                  <section className="logo ">
+                  <section className="logo w-14">
                     <Link to="/">
-                      <img src={logo} alt="logo desa" className="w-20" />
+                      <img src={logo} alt="logo desa" />
                     </Link>
                   </section>
                   <div className="mobile:hidden md:flex md:relative md:top-0">
@@ -102,21 +102,13 @@ function App() {
                   </div>
                 </section>
 
-                <section className="mobile:flex-1 mobile:flex mobile:justify-end w-full md:hidden text-3xl">
-                  <button type="button" className="p-2" onClick={() => setIsHamburgerClicked((prevState) => !prevState)}>
-                    {isHamburgerClicked ? (
-                      <AiOutlineClose />
-                    ) : (
-                      <RxHamburgerMenu />
-
-                    )}
-                  </button>
-                </section>
                 <section className="md:flex p-8">
                   {isLogin ? (
-                    <div className="flex items-center gap-4">
-                      <span className="text-2xl flex items-center"><CgProfile /></span>
-                      <h1 className="text-xl">{user.username}</h1>
+                    <div className="flex items-center gap-4 justify-between ">
+                      <div className="mobile:hidden md:flex md:gap-4">
+                        <span className="md:text-2xl mobile:text-lg flex items-center justify-center"><CgProfile /></span>
+                        <h1 className="md:text-xl mobile:text-md">{user.username}</h1>
+                      </div>
                       <button
                         type="button"
                         onClick={() => {
@@ -126,9 +118,9 @@ function App() {
                           removeAccessToken({ key: 'USER' });
                           removeRefreshToken({ key: 'REFRESH_TOKEN' });
                         }}
+                        className="border px-7 py-2 rounded-xl bg-primary-black text-white hover:bg-gray-400 transition-colors duration-200 mobile:relative mobile:left-10 md:left-0"
                       >
                         Logout
-
                       </button>
                     </div>
                   ) : (
@@ -142,6 +134,16 @@ function App() {
                     </div>
 
                   )}
+                </section>
+                <section className="mobile:flex-1 mobile:flex mobile:justify-end w-full md:hidden text-3xl">
+                  <button type="button" className="p-2" onClick={() => setIsHamburgerClicked((prevState) => !prevState)}>
+                    {isHamburgerClicked ? (
+                      <AiOutlineClose />
+                    ) : (
+                      <RxHamburgerMenu />
+
+                    )}
+                  </button>
                 </section>
               </header>
               <div className={`bg-sidebar-color shadow-lg border-t md:hidden absolute z-10 right-0 left-0 ${!isHamburgerClicked ? 'translate-x-[1000px]' : '-translate-x-0'} transition-transform`}>
