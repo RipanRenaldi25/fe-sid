@@ -101,6 +101,7 @@ function App() {
                     <NavigationBar />
                   </div>
                 </section>
+
                 <section className="mobile:flex-1 mobile:flex mobile:justify-end w-full md:hidden text-3xl">
                   <button type="button" className="p-2" onClick={() => setIsHamburgerClicked((prevState) => !prevState)}>
                     {isHamburgerClicked ? (
@@ -143,6 +144,17 @@ function App() {
                   )}
                 </section>
               </header>
+              <div className={`bg-sidebar-color shadow-lg border-t md:hidden absolute z-10 right-0 left-0 ${!isHamburgerClicked ? 'translate-x-[1000px]' : '-translate-x-0'} transition-transform`}>
+                <nav className="px-5 py-1">
+                  <ul className="flex flex-col gap-4">
+                    <li className="font-semibold text-lg py-2" onClick={() => setIsHamburgerClicked(false)}><Link to="/">Home</Link></li>
+                    <li className="font-semibold text-lg py-2" onClick={() => setIsHamburgerClicked(false)}><Link to="/profile">Profile</Link></li>
+                    <li className="font-semibold text-lg py-2" onClick={() => setIsHamburgerClicked(false)}><Link to="/faq">FAQ</Link></li>
+                    <li className="font-semibold text-lg py-2" onClick={() => setIsHamburgerClicked(false)}><Link to="/login">Login</Link></li>
+                    <li className="font-semibold text-lg py-2" onClick={() => setIsHamburgerClicked(false)}><Link to="/signup">Register</Link></li>
+                  </ul>
+                </nav>
+              </div>
               <main className="relative w-full h-full">
                 <Routes>
                   <Route path="/*" Component={LandingPage} />

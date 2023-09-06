@@ -37,19 +37,19 @@ function LandingPage() {
             </Link>
           </div>
         </div>
-        <div className="relative bg-yellow-dark row-span-2 h-[240px] rounded-xl px-5 py-3 hover:cursor-pointer" onClick={() => navigate('/faq')}>
-          <p className="max-w-[100px] font-semibold">Have Some Questions?</p>
-          <Link to="document" className="absolute top-3 right-3 text-3xl">
+        <div className="relative bg-yellow-dark row-span-2 mobile:h-[150px] md:h-[240px] rounded-xl px-5 py-3 hover:cursor-pointer" onClick={() => navigate('/faq')}>
+          <p className="mobile:max-w-[70px] md:max-w-[180px] font-semibold mobile:relative mobile:text-md md:text-2xl">Have Some Questions?</p>
+          <Link to="document" className="absolute top-3 right-3 md:text-3xl mobile:text-2xl">
             <HiMiniArrowUpRight />
           </Link>
-          <h1 className="absolute bottom-5 text-4xl font-semibold">FAQ</h1>
+          <h1 className="absolute bottom-5 mobile:text-3xl md:text-4xl font-semibold">FAQ</h1>
         </div>
-        <div className="relative bg-gradient-to-tr from-yellow-gray to-[#D7D8DC] row-span-2 h-[240px] rounded-2xl px-5 py-3 hover:cursor-pointer" onClick={() => navigate('/document')}>
-          <p>Upload document</p>
-          <Link to="document" className="absolute top-3 right-3 text-3xl rotate-45">
+        <div className="relative bg-gradient-to-tr mobile:h-[150px] from-yellow-gray to-[#D7D8DC] row-span-2 md:h-[240px] rounded-2xl px-5 py-3 hover:cursor-pointer mobile:bg-red-500 mobile:text-sm md:text-2xl font-semibold" onClick={() => navigate('/document')}>
+          <p className="mobile:max-w-[70px] md:max-w-[180px] mobile:text-md">Upload document</p>
+          <Link to="document" className="absolute top-3 right-3 mobile:text-2xl md:text-3xl rotate-45">
             <IoCloudUploadOutline />
           </Link>
-          <h1 className="absolute bottom-5 text-4xl font-semibold">Upload</h1>
+          <h1 className="absolute bottom-5 md:text-4xl mobile:text-3xl font-semibold">Upload</h1>
         </div>
       </section>
     </article>
