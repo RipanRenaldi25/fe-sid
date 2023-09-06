@@ -149,11 +149,51 @@ function App() {
               <div className={`bg-sidebar-color shadow-lg border-t md:hidden absolute z-10 right-0 left-0 ${!isHamburgerClicked ? 'translate-x-[1000px]' : '-translate-x-0'} transition-transform`}>
                 <nav className="px-5 py-1">
                   <ul className="flex flex-col gap-4">
-                    <li className="font-semibold text-lg py-2" onClick={() => setIsHamburgerClicked(false)}><Link to="/">Home</Link></li>
-                    <li className="font-semibold text-lg py-2" onClick={() => setIsHamburgerClicked(false)}><Link to="/profile">Profile</Link></li>
-                    <li className="font-semibold text-lg py-2" onClick={() => setIsHamburgerClicked(false)}><Link to="/faq">FAQ</Link></li>
-                    <li className="font-semibold text-lg py-2" onClick={() => setIsHamburgerClicked(false)}><Link to="/login">Login</Link></li>
-                    <li className="font-semibold text-lg py-2" onClick={() => setIsHamburgerClicked(false)}><Link to="/signup">Register</Link></li>
+                    <li
+                      className="font-semibold text-lg py-2"
+                      onClick={() => {
+                        setIsHamburgerClicked(false);
+                        navigate('/');
+                      }}
+                    >
+                      <span>Home</span>
+                    </li>
+                    <li
+                      className="font-semibold text-lg py-2"
+                      onClick={() => {
+                        setIsHamburgerClicked(false);
+                        navigate('/profile');
+                      }}
+                    >
+                      <span>Profile</span>
+                    </li>
+                    <li
+                      className="font-semibold text-lg py-2"
+                      onClick={() => {
+                        setIsHamburgerClicked(false);
+                        navigate('/faq');
+                      }}
+                    >
+                      <span>FAQ</span>
+                    </li>
+                    <li
+                      className="font-semibold text-lg py-2"
+                      onClick={() => {
+                        setIsHamburgerClicked(false);
+                        navigate('/login');
+                      }}
+                    >
+                      <span>Login</span>
+                    </li>
+                    <li
+                      className="font-semibold text-lg py-2"
+                      onClick={() => {
+                        setIsHamburgerClicked(false);
+                        navigate('/signup');
+                      }}
+                    >
+                      <span>Register</span>
+                    </li>
                   </ul>
                 </nav>
               </div>
