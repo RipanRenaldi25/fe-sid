@@ -1,4 +1,4 @@
-import { getUserByNIK, getUsers } from '../../utils/utilities';
+import { getUserByNIK, getUsers, searchUserByNik } from '../../utils/utilities';
 import { setIsFetchingActionCreator } from '../requests/requestAction';
 
 import USER_TYPE from './UserType';
@@ -45,8 +45,9 @@ export const asyncGetUsers = () => async (dispatch) => {
 export const asyncGetUser = (nik) => async (dispatch) => {
   dispatch(setIsFetchingActionCreator(true));
   try {
-    const response = await getUserByNIK(nik);
+    const response = await searchUserByNik(nik);
     const { data: { data } } = response;
+    console.log({ data });
     dispatch(getUserActionCreator(data));
   } catch (e) {
     console.log(e);

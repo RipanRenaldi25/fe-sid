@@ -174,8 +174,17 @@ export const getUsers = async () => {
   return response;
 };
 
+export const searchUserByNik = async (nik) => {
+  const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/user/search?nik=${nik}`, {
+    headers: {
+      Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
+    },
+  });
+  return response;
+};
+
 export const getUserByNIK = async (nik) => {
-  const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/users/user/${nik}`, {
+  const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/user/${nik}`, {
     headers: {
       Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
     },

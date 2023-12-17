@@ -2,7 +2,11 @@ import React, { useContext, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import sidebarContext from '../../Context/sidebarContext';
 import AccountTable from '../Presentational/AccountTable';
-import { asyncGetUsers } from '../../states';
+import {
+  asyncGetUser, asyncGetUsers, changeInputNikBarActionCreator, clearSearchbarInput, clearSearchedUserActionCreator,
+} from '../../states';
+import useDebounce from '../../hooks/useDebounce';
+import useFormInput from '../../hooks/useInput';
 
 function AccountPage() {
   const { sidebarOpen } = useContext(sidebarContext);
@@ -31,11 +35,19 @@ function AccountPage() {
 
   ]), []);
   const data = useMemo(() => users, [users]);
-  console.log({ data });
+  const [nikBarInput] = useFormInput('searchFormAccount', {
+    onChangeInput: changeInputNikBarActionCreator, onClearAction: clearSearchbarInput,
+  });
+  const debounceValue = useDebounce(nikBarInput.nik, 400);
 
   useEffect(() => {
-    dispatch(asyncGetUsers());
-  }, []);
+    if (debounceValue === '') {
+      dispatch(clearSearchedUserActionCreator());
+      dispatch(asyncGetUsers());
+    } else {
+      dispatch(asyncGetUser(debounceValue));
+    }
+  }, [debounceValue]);
   return (
     <section className={`relative ${sidebarOpen ? 'left-[250px] w-[calc(100%-250px)]' : 'left-[88px] w-[calc(100%-88px)]'} transition-all h-screen p-5`}>
       <AccountTable columns={columns} data={data} />

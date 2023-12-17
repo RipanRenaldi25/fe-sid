@@ -58,9 +58,11 @@ function App() {
   const onRegisterHandler = (e) => {
     e.preventDefault();
     const name = `${registerInput.firstName} ${registerInput.lastName}`;
-    const { username, password, nik } = registerInput;
+    const {
+      username, password, nik, phoneNumber,
+    } = registerInput;
     asyncEventHandler({
-      name, username, password, nik, role: 'admin', phoneNumber: registerInput.phoneNumber,
+      name, username, password, nik, role: 'admin', phoneNumber,
     });
   };
 
@@ -117,9 +119,22 @@ function App() {
         {isLogin && user.role === 'admin' && (
           <article className="Admin Page relative bg-bg-color min-h-screen">
             <section>
-              <Overlay isOpen={isOpen} onClose={() => dispatch(ToggleOpenModal(false))} />
-              <ModalBody title="Tambah Akun" isOpen={isOpen} onClose={() => dispatch(ToggleOpenModal(false))}>
-                <RegisterForm onChangeInputHandler={onChangeInputHandler} onRegisterHandler={onRegisterHandler} registerInput={registerInput} />
+              <Overlay
+                isOpen={isOpen}
+                onClose={() => {
+                  dispatch(ToggleOpenModal(false));
+                  dispatch(clearInputRegisterActionCreator());
+                }}
+              />
+              <ModalBody
+                title="Tambah Akun"
+                isOpen={isOpen}
+                onClose={() => {
+                  dispatch(ToggleOpenModal(false));
+                  dispatch(clearInputRegisterActionCreator());
+                }}
+              >
+                <RegisterForm onChangeInputHandler={onChangeInputHandler} onRegisterHandler={onRegisterHandler} registerInput={registerInput} isShow={false} />
               </ModalBody>
             </section>
             <Sidebar />

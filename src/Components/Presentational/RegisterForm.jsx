@@ -1,9 +1,11 @@
 import React from 'react';
-import { func, object } from 'prop-types';
+import { bool, func, object } from 'prop-types';
 import TextInput from '../Reusable/TextInput';
 import NavigationItem from '../Reusable/NavigationItem';
 
-function RegisterForm({ onRegisterHandler, onChangeInputHandler, registerInput }) {
+function RegisterForm({
+  onRegisterHandler, onChangeInputHandler, registerInput, isShow,
+}) {
   return (
     <form onSubmit={onRegisterHandler}>
       <div className="flex justify-between mb-3">
@@ -16,7 +18,7 @@ function RegisterForm({ onRegisterHandler, onChangeInputHandler, registerInput }
         <TextInput title="Password" placeholder="****" type="password" value={registerInput.password} name="password" onChange={onChangeInputHandler} />
         <TextInput title="Nomor Telepon" placeholder="0812323123" type="text" value={registerInput.phoneNumber} name="phoneNumber" onChange={onChangeInputHandler} />
       </div>
-      <NavigationItem path="/login" title="Already have an account? Click here!" />
+      <NavigationItem path="/login" title="Already have an account? Click here!" isShow={isShow} />
       <button type="submit" className="mt-2 w-full bg-yellow-dark rounded-md py-2 font-semibold">
         Submit
       </button>
@@ -28,6 +30,7 @@ RegisterForm.propTypes = {
   onRegisterHandler: func.isRequired,
   onChangeInputHandler: func.isRequired,
   registerInput: object.isRequired,
+  isShow: bool,
 };
 
 export default RegisterForm;
