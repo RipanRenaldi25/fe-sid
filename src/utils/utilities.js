@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios, { all } from 'axios';
+import jszip from 'jszip';
 import { logoutUser, setIsLogin } from '../states';
 
 export const registerUser = async ({
@@ -170,7 +171,6 @@ export const getUsers = async () => {
       Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
     },
   });
-
   return response;
 };
 
@@ -182,3 +182,43 @@ export const getUserByNIK = async (nik) => {
   });
   return response;
 };
+
+export const getDocuments = async (requestId) => {
+  const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/requests/${requestId}`, {
+    headers: {
+      Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
+    },
+  });
+
+  return response.data;
+};
+
+export const getBlobImages = async (imageUrls) => {
+  const allPromises = imageUrls.map(async (image) => {
+    const response = await fetch(image.url);
+    const blob = await response.blob();
+    return {
+      imageUrl: image.url,
+      blob,
+    };
+  });
+  return Promise.all(allPromises);
+};
+
+const executeDownload = async (blobs) => {
+  const zipper = new jszip();
+  blobs.forEach(({ imageUrl, blob }) => {
+    const splitedFile = imageUrl.split('/');
+    const fileName = splitedFile[splitedFile.length - 1];
+    zipper.file(fileName, blob);
+  });
+  const zipBlob = await zipper.generateAsync({ type: 'blob' });
+  const url = URL.createObjectURL(zipBlob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'test.zip';
+  a.click();
+  URL.revokeObjectURL(url);
+};
+
+export default executeDownload;

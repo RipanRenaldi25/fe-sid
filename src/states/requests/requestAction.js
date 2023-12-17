@@ -1,5 +1,5 @@
-import {
-  changeStatusProcess, deleteCompressedDocument, downloadMultipleDocument, getRequests, searchRequest,
+import executeDownload, {
+  changeStatusProcess, deleteCompressedDocument, downloadMultipleDocument, getBlobImages, getDocuments, getRequests, searchRequest,
 } from '../../utils/utilities';
 import REQUESTS_TYPE from './RequestsType';
 
@@ -47,7 +47,6 @@ export const removeSearchRequest = () => ({
 
 export const asyncChangeStatusDocument = (requestId, status) => async (dispatch) => {
   try {
-    console.log({ requestId, status });
     await changeStatusProcess(requestId, status);
     dispatch(updateSpecificRequestActionCreator(requestId, status));
   } catch (e) {
@@ -57,18 +56,12 @@ export const asyncChangeStatusDocument = (requestId, status) => async (dispatch)
 
 export const asyncDownloadDocuments = (requestId) => async (dispatch) => {
   try {
-    const response = await downloadMultipleDocument(requestId);
-    const blob = response.data;
-    const url = URL.createObjectURL(new Blob([blob]));
-
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `doc-${requestId}.zip`;
-    a.click();
-    URL.revokeObjectURL(url);
-    dispatch(asyncChangeStatusDocument(requestId, 'processed'));
+    const responseData = await getDocuments(requestId);
+    const blobs = await getBlobImages(responseData.data.documents);
+    await executeDownload(blobs);
+    dispatch(asyncChangeStatusDocument(requestId, 'PROCESS'));
     await deleteCompressedDocument();
-    dispatch(updateSpecificRequestActionCreator(requestId, 'procesesd'));
+    dispatch(updateSpecificRequestActionCreator(requestId, 'PROCESS'));
   } catch (e) {
     console.log(e);
   }

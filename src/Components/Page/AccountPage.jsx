@@ -26,11 +26,12 @@ function AccountPage() {
     },
     {
       Header: 'Nomor Telepon',
-      accessor: 'phones[0].phone_number',
+      accessor: 'contacts[0].phoneNumber',
     },
 
   ]), []);
   const data = useMemo(() => users, [users]);
+  console.log({ data });
 
   useEffect(() => {
     dispatch(asyncGetUsers());

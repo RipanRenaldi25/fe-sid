@@ -21,12 +21,12 @@ function AccountTable({ data, columns }) {
   const dispatch = useDispatch();
   const debounceValue = useDebounce(nikBarInput.nik, 400);
 
-  useEffect(() => {
-    if (debounceValue === '') {
-      dispatch(clearSearchedUserActionCreator());
-    }
-    dispatch(asyncGetUser(debounceValue));
-  }, [debounceValue]);
+  // useEffect(() => {
+  //   if (debounceValue === '') {
+  //     dispatch(clearSearchedUserActionCreator());
+  //   }
+  //   dispatch(asyncGetUser(debounceValue));
+  // }, [debounceValue]);
 
   return (
     <section className="bg-sidebar-color py-10  rounded-xl">
