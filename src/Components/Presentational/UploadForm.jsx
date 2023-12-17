@@ -108,79 +108,81 @@ function UploadForm() {
   };
 
   return (
-    <section className="w-2/3">
-      <form encType="multipart/form-data" className="mobile:mt-10 md:mt-0 mx-auto relative" onSubmit={onSubmit}>
-        <div>
+    <div className="w-[calc(100%-280px)] overflow-hidden pt-8 absolute left-[280px] flex justify-center items-center bg-bg-color min-h-screen">
+      <section className="w-2/3">
+        <form encType="multipart/form-data" className="mobile:mt-10 md:mt-0 mx-auto relative" onSubmit={onSubmit}>
           <div>
-            <header className="mobile:justify-center flex flex-col items-center mb-4">
-              <h1 className="text-2xl">Upload Dokumen</h1>
-              <p className="text-slate-500 text-xl">Isi form di bawah untuk mengirim dokumen</p>
-            </header>
-            <div className="type mb-5">
-              <h1 className="mb-3 text-xl">Jenis Dokumen</h1>
-              <SelectInput options={selectOptions} onChangeHandler={(e) => setDocumentType(e.target.value)} value={documentType} />
+            <div>
+              <header className="mobile:justify-center flex flex-col items-center mb-4">
+                <h1 className="text-2xl">Upload Dokumen</h1>
+                <p className="text-slate-500 text-xl">Isi form di bawah untuk mengirim dokumen</p>
+              </header>
+              <div className="type mb-5">
+                <h1 className="mb-3 text-xl">Jenis Dokumen</h1>
+                <SelectInput options={selectOptions} onChangeHandler={(e) => setDocumentType(e.target.value)} value={documentType} />
+              </div>
+              <div className="w-full">
+                <UploadFileInput percent={percent} fileSize={5} fileType="pdf" uploading={uploading} setFiles={setFiles} files={files} />
+              </div>
+              <button type="submit" className="right-0 mt-3 bg-gradient-to-r from-secondary-blue to-secondary-blue-dark text-white w-full rounded-full py-1 hover:from-secondary-blue-dark hover:to-blue-950 transition-colors">Upload</button>
+
             </div>
-            <div className="w-full">
-              <UploadFileInput percent={percent} fileSize={5} fileType="pdf" uploading={uploading} setFiles={setFiles} files={files} />
-            </div>
-            <button type="submit" className="right-0 mt-3 bg-gradient-to-r from-secondary-blue to-secondary-blue-dark text-white w-full rounded-full py-1 hover:from-secondary-blue-dark hover:to-blue-950 transition-colors">Upload</button>
 
           </div>
-
-        </div>
-        <section className="bg-sidebar-color rounded-xl p-6">
-          <h1 className="font-semibold">Uploaded File</h1>
-          {files.map((file) => (
-            <div className="flex justify-between mt-4 bg-[#FBFBFB] shadow-lg rounded-xl px-6 py-4" key={file.name}>
-              <div className="flex gap-5 w-2/5">
-                <span className="text-4xl flex justify-center items-center h-[40px]"><AiOutlineFilePdf /></span>
-                <div className="mr-2 flex flex-col gap-2">
-                  <h2 className="text-[12px]">{splitFileName(file.name)[0]}</h2>
-                  <div className="flex gap-2 text-sm items-center text-gray-500 w-full">
-                    <h3>{getFileType(file.type)}</h3>
-                    <div className="w-2 h-2 bg-gray-500 rounded-full" />
-                    <h3>
-                      {getFileSize(file.size)}
-                    </h3>
+          <section className="bg-sidebar-color rounded-xl p-6 mt-4" hidden={!files.length}>
+            <h1 className="font-semibold">Uploaded File</h1>
+            {files.map((file) => (
+              <div className="flex justify-between mt-4 bg-[#FBFBFB] shadow-lg rounded-xl px-6 py-4" key={file.name}>
+                <div className="flex gap-5 w-2/5">
+                  <span className="text-4xl flex justify-center items-center h-[40px]"><AiOutlineFilePdf /></span>
+                  <div className="mr-2 flex flex-col gap-2">
+                    <h2 className="text-[12px]">{splitFileName(file.name)[0]}</h2>
+                    <div className="flex gap-2 text-sm items-center text-gray-500 w-full">
+                      <h3>{getFileType(file.type)}</h3>
+                      <div className="w-2 h-2 bg-gray-500 rounded-full" />
+                      <h3>
+                        {getFileSize(file.size)}
+                      </h3>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="progress flex gap-4 w-3/4 items-center">
-                <div className="relative w-[80%] h-2 rounded-md progress-container bg-indigo-100">
-                  <span
-                    className="h-full rounded-md block bg-gradient-to-r from-blue-600 to-indigo-800 transition-all"
-                    style={{
-                      width: `${percent}%`,
-                    }}
-                  />
+                <div className="progress flex gap-4 w-3/4 items-center">
+                  <div className="relative w-[80%] h-2 rounded-md progress-container bg-indigo-100">
+                    <span
+                      className="h-full rounded-md block bg-gradient-to-r from-blue-600 to-indigo-800 transition-all"
+                      style={{
+                        width: `${percent}%`,
+                      }}
+                    />
+                  </div>
+                  {percent === 100 ? (
+                    <span><AiOutlineCheck /></span>
+                  ) : (
+                    <span className="text-sm text-blue-600">
+                      {percent}
+                      %
+                    </span>
+
+                  )}
                 </div>
-                {percent === 100 ? (
-                  <span><AiOutlineCheck /></span>
-                ) : (
-                  <span className="text-sm text-blue-600">
-                    {percent}
-                    %
-                  </span>
+                <div className="flex items-center">
+                  <button
+                    type="button"
+                    className="text-xl text-red-600"
+                    onClick={() => onDeleteFileHandler(file.name)}
+                  >
+                    <span><CgClose /></span>
 
-                )}
-              </div>
-              <div className="flex items-center">
-                <button
-                  type="button"
-                  className="text-xl text-red-600"
-                  onClick={() => onDeleteFileHandler(file.name)}
-                >
-                  <span><CgClose /></span>
+                  </button>
+                </div>
 
-                </button>
               </div>
 
-            </div>
-
-          ))}
-        </section>
-      </form>
-    </section>
+            ))}
+          </section>
+        </form>
+      </section>
+    </div>
   );
 }
 

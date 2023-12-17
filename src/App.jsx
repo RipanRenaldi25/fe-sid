@@ -36,7 +36,7 @@ import useFormInput from './hooks/useInput';
 import UploadForm from './Components/Presentational/UploadForm';
 import UserAvatar from './Components/Presentational/UserAvatar';
 import UserSidebar from './Components/Presentational/UserSidebar';
-import avatar from './assets/images/john-doe.jpg';
+import nophoto from './assets/images/nophoto.jpeg';
 import UserDocuments from './Components/Presentational/UserDocuments';
 
 const menuLists = [{
@@ -91,6 +91,7 @@ function App() {
       navigate('/admin/dashboard');
     }
   }, [user.role]);
+  console.log({ user });
   return (
     <SidebarContext.Provider value={useMemo(() => (
       {
@@ -103,21 +104,21 @@ function App() {
     >
       <div>
         {isLogin && user.role === 'user' && (
-        <article className="relative bg-bg-color min-h-screen flex">
-          <section className="sidebar bg-[#f8f8f8] min-h-screen w-[280px] relative">
-            <UserAvatar imageUrl={avatar} />
-            <UserSidebar menuList={menuList} onChangeMenuList={onChangeMenuList} />
-          </section>
-          <section className="flex justify-center items-start min-w-[80%] pt-8">
+          <div className="">
+            <article className="min-h-screen fixed top-0 left-0 w-[280px]">
+              <section className="sidebar bg-[#f8f8f8] min-h-screen w-[280px] relative">
+                <UserAvatar imageUrl={nophoto} name={user.name} nik={user.id} />
+                <UserSidebar menuList={menuList} onChangeMenuList={onChangeMenuList} />
+              </section>
+            </article>
             <Routes>
               <Route path="/user/upload" Component={UploadForm} />
               <Route path="/user/document" Component={UserDocuments} />
             </Routes>
-          </section>
-        </article>
+          </div>
         )}
         {isLogin && user.role === 'admin' && (
-          <article className="Admin Page relative bg-bg-color min-h-screen">
+          <article className="Admin Page relative min-h-screen">
             <section>
               <Overlay
                 isOpen={isOpen}
