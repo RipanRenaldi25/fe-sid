@@ -3,7 +3,7 @@ import React from 'react';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
 function PaginateButton({
-  canPreviousPage, canNextPage, previousPage, nextPage, pageIndex,
+  canPreviousPage, canNextPage, previousPage, nextPage, pageIndex, pageCount,
 }) {
   return (
     <section className="absolute right-8 bottom-3">
@@ -14,7 +14,11 @@ function PaginateButton({
         <div className="flex gap-2 items-center">
           <span>Page</span>
           <span className="bg-primary-white w-8 flex items-center justify-center rounded-lg">{pageIndex + 1}</span>
-          <span>of 56</span>
+          <span>
+            of
+            {' '}
+            {pageCount}
+          </span>
         </div>
         <button type="button" className={`flex items-center ${canNextPage ? 'bg-purple-color' : 'bg-gray-400'}  rounded-xl text-white `} disabled={!canNextPage} onClick={nextPage}>
           <span className="text-2xl"><MdKeyboardArrowRight /></span>

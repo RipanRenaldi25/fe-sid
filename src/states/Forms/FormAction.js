@@ -73,9 +73,6 @@ export const asyncRegister = ({
     if (data) {
       alert('Registrasi berhasil');
     }
-    if (role === 'admin') {
-      window.location.reload();
-    }
   } catch (e) {
     if (e.response.status === 422) {
       alert('isi form terlebih dahulu');
@@ -86,8 +83,14 @@ export const asyncRegister = ({
 export const asyncLogin = ({ username, password }) => async (dispatch) => {
   try {
     const { data } = await login({ username, password });
+    let role = null;
+    if (data.roleId === 'user' || data.roleId === '1') {
+      role = 'user';
+    } else {
+      role = 'admin';
+    }
     dispatch(setUserActionCreator({
-      id: data.id, username: data.username, name: data.name, role: data.role,
+      id: data.nik, username: data.username, name: data.name, role,
     }));
     dispatch(setIsLogin(true));
     putRefreshTokenOnLocalStorage({ key: 'REFRESH_TOKEN', token: data.refreshToken });
@@ -95,10 +98,10 @@ export const asyncLogin = ({ username, password }) => async (dispatch) => {
     putAccessTokenOnSessionStorage({
       key: 'USER',
       token: {
-        id: data.id,
+        id: data.nik,
         username: data.username,
         name: data.name,
-        role: data.role,
+        role,
       },
     });
     alert('Login Berhasil');

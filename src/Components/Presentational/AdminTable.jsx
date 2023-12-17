@@ -19,6 +19,7 @@ function AdminTable({ columns, data = [], requestSearch = [] }) {
   const [searchbarInput, { onChangeInputHandler }] = useFormInput('searchForm', {
     onChangeInput: changeInputSearchFormActionCreator, onClearAction: clearInputLoginActionCreator,
   });
+  console.log({ requestSearch });
   const dispatch = useDispatch();
   const debounceValue = useDebounce(searchbarInput.name, 400);
   useEffect(() => {

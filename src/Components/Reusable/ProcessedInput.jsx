@@ -9,15 +9,15 @@ const processOptions = [
   },
   {
     title: 'Belum Diproses',
-    value: 'unprocessed',
+    value: 'UNPROCESS',
   },
   {
     title: 'Sedang Diproses',
-    value: 'processed',
+    value: 'PROCESS',
   },
   {
     title: 'Telah Diproses',
-    value: 'completed',
+    value: 'PROCESSED',
   },
 ];
 

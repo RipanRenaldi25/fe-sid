@@ -9,7 +9,7 @@ function UploadFileInput({ setFiles }) {
 
   return (
     <section
-      className="max-w-[500px] bg-white py-1.5 px-6 rounded-lg"
+      className="bg-white py-1.5 px-6 rounded-lg"
     >
       <header className="w-full bg-white rounded-lg after:contents-[''] after:block after:w-full after:h-0.5 after:bg-slate-200 after:mt-2">
         <h1 className="mx-3 font-semibold text-xl ">Upload File</h1>
@@ -36,6 +36,7 @@ function UploadFileInput({ setFiles }) {
         onDrop={(e) => {
           e.preventDefault();
           setFiles((prevState) => [...prevState, ...e.dataTransfer.files]);
+          setIsDrag(false);
         }}
       >
         <section className="flex justify-center items-center flex-col h-[150px]">

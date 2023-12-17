@@ -10,6 +10,7 @@ function RegisterPage() {
     e.preventDefault();
     const name = `${registerInput.firstName} ${registerInput.lastName}`;
     const { username, password, nik } = registerInput;
+
     asyncEventHandler({
       name, username, password, nik, role: 'user', phoneNumber: registerInput.phoneNumber,
     });

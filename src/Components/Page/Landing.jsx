@@ -3,7 +3,7 @@ import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import { HiMiniArrowUpRight } from 'react-icons/hi2';
 import { IoCloudUploadOutline } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
-import bgDark from '../../assets/images/dark-2.jpg';
+import bgDark from '../../assets/images/gambar-desa.jpg';
 import bgForest from '../../assets/images/forest-2.png';
 import NavigationItem from '../Reusable/NavigationItem';
 
@@ -16,7 +16,7 @@ function LandingPage() {
           <p className="mobile:text-md text-lg font-thin mb-3">Informasi</p>
           <h1 className="mobile:text-4xl md:text-5xl max-w-md">Desa Babakan Peuteuy</h1>
           <div className="text-2xl absolute top-1/2 right-0">
-            <button type="button" className="border rounded-full px-1 py-0.5 scale-0 group-hover:scale-100 transition-all duration-100  hover:bg-gray-200 hover:duration-200 hover:text-black">
+            <button type="button" className="border rounded-full px-1 py-0.5 scale-0 group-hover:scale-100 transition-all duration-100  hover:duration-200 hover:text-black">
               <NavigationItem path="/home" title={<MdKeyboardDoubleArrowRight className="hover:text-black" />} />
             </button>
           </div>
@@ -46,7 +46,7 @@ function LandingPage() {
         </div>
         <div className="relative bg-gradient-to-tr mobile:h-[150px] from-yellow-gray to-[#D7D8DC] row-span-2 md:h-[240px] rounded-2xl px-5 py-3 hover:cursor-pointer mobile:bg-red-500 mobile:text-sm md:text-2xl font-semibold" onClick={() => navigate('/document')}>
           <p className="mobile:max-w-[70px] md:max-w-[180px] mobile:text-md">Upload document</p>
-          <Link to="document" className="absolute top-3 right-3 mobile:text-2xl md:text-3xl rotate-45">
+          <Link to="/" className="absolute top-3 right-3 mobile:text-2xl md:text-3xl rotate-45">
             <IoCloudUploadOutline />
           </Link>
           <h1 className="absolute bottom-5 md:text-4xl mobile:text-3xl font-semibold">Upload</h1>

@@ -2,22 +2,28 @@ import axios from 'axios';
 import { logoutUser, setIsLogin } from '../states';
 
 export const registerUser = async ({
-  username, password, name, nik, role, phoneNumber,
+  username, password, name, nik, role = '1', phoneNumber,
 }) => {
-  const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/users/register`, {
+  let roleId = null;
+  if (role === 'user') {
+    roleId = '1';
+  } else {
+    roleId = '2';
+  }
+  const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/register`, {
     username,
     password,
     name,
     nik,
-    role,
-    phone: phoneNumber,
+    roleId,
+    phoneNumber,
   });
 
   return response.data;
 };
 
 export const login = async ({ username, password }) => {
-  const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/users/login`, { username, password });
+  const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, { username, password });
 
   return response.data;
 };
@@ -82,7 +88,7 @@ export const logout = async (dispatch) => {
   dispatch(setIsLogin(false));
   dispatch(logoutUser());
   try {
-    await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/authentications/${getRefreshToken({ key: 'REFRESH_TOKEN' })}`);
+    await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/auth/${getRefreshToken({ key: 'REFRESH_TOKEN' })}`);
   } catch (e) {
     console.log(e);
   }
@@ -92,14 +98,14 @@ export const logout = async (dispatch) => {
 };
 
 export const updateAccessToken = async () => {
-  const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/authentications`, {
+  const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/auth`, {
     refreshToken: getRefreshToken({ key: 'REFRESH_TOKEN' }),
   });
   putAccessTokenOnSessionStorage({ key: 'ACCESS_TOKEN', token: response.data.accessToken });
 };
 
 export const getRequests = async () => {
-  const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/documents/requests`, {
+  const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/requests`, {
     headers: {
       Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
     },
@@ -108,7 +114,7 @@ export const getRequests = async () => {
 };
 
 export const getSpecificRequest = async (requestId) => {
-  const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/documents/request/${requestId}`, {
+  const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/requests/${requestId}`, {
     headers: {
       Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
     },
@@ -129,7 +135,7 @@ export const downloadMultipleDocument = async (requestId) => {
 };
 
 export const changeStatusProcess = async (requestId, process) => {
-  const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/documents/request/${requestId}`, {
+  const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/requests/${requestId}`, {
     process,
   }, {
     headers: {
@@ -149,7 +155,7 @@ export const deleteCompressedDocument = async () => {
 };
 
 export const searchRequest = async ({ keyword, date, status }) => {
-  const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/documents/requests/search?keyword=${keyword}&date=${date}&status=${status}`, {
+  const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/requests/search?keyword=${keyword}&date=${date}&status=${status}`, {
     headers: {
       Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
     },

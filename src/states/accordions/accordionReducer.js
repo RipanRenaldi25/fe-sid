@@ -2,18 +2,18 @@ import ACCORDION_ACTION_TYPE from './AccordionActionType';
 
 const initialState = [
   {
-    title: 'Accordion Title 1',
-    description: 'Accordion Description 1',
+    title: 'Bagaimana Cara Mengirim Dokumen?',
+    description: 'Pengguna harus login terlebih dahulu untuk mengirim dokumen',
     isActive: false,
   },
   {
-    title: 'Accordion Title 2',
-    description: 'Accordion Description 2',
+    title: 'Bagaimana alur setelah dokumen dikirim?',
+    description: 'Status dari dokumen yang dikirim akan terlihat pada dashboard pengguna. Jika dokumen sedang diproses, maka pengguna akan melihat statusnya sedang diproses',
     isActive: false,
   },
   {
-    title: 'Accordion Title 3',
-    description: 'Accordion Description 3',
+    title: 'Bagaimana cara login pada aplikasi?',
+    description: 'Pengguna harus mendaftar akun terlebih dahulu dengan menekan tombol signup pada pojok kanan atas tampilan aplikasi. Setelah akun berhasil dibuat, pengguna menekan tombol login kemudian mengisi form yang telah pengguna isi sebelumnya',
     isActive: false,
   },
 ];

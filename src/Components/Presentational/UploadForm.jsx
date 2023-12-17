@@ -3,6 +3,7 @@ import axios from 'axios';
 import { AiOutlineCheck, AiOutlineFilePdf } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { CgClose } from 'react-icons/cg';
 import SelectInput from '../Reusable/SelectInput';
 import UploadFileInput from '../Reusable/UploadFileInput';
 import {
@@ -17,27 +18,27 @@ const selectOptions = [
   },
   {
     title: 'Surat Kematian',
-    value: 'surat_kematian',
+    value: 'SURAT_KEMATIAN',
   },
   {
     title: 'SKU',
-    value: 'sku',
+    value: 'SKU',
   },
   {
     title: 'Domisili',
-    value: 'domisili',
+    value: 'DOMISILI',
   },
   {
     title: 'Keterangan Lahir',
-    value: 'keterangan_lahir',
+    value: 'KETERANGAN_LAHIR',
   },
   {
     title: 'Surat Pindah',
-    value: 'surat_pindah',
+    value: 'SURAT_PINDAH',
   },
   {
     title: 'Surat Serba Guna',
-    value: 'surat_serba_guna',
+    value: 'SURAT_SERBA_GUNA',
   },
 ];
 
@@ -49,6 +50,7 @@ function UploadForm() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const uploadFiles = async ({ documentKind, documents }) => {
     if (documentType === 'default') {
       alert('Pilih jenis dokumen terlebih dahulu');
@@ -57,11 +59,15 @@ function UploadForm() {
     let formData;
     try {
       formData = new FormData();
-      formData.append('documentKind', documentKind);
+      formData.append('type', documentKind);
+      if (!files.length) {
+        alert('Harap upload file terlebih dahulu');
+        return;
+      }
       documents.forEach((document) => {
-        formData.append('document', document);
+        formData.append('image', document);
       });
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/documents`, formData, {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/requests`, formData, {
         headers: {
           Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
         },
@@ -72,28 +78,8 @@ function UploadForm() {
           setUploading(false);
         },
       });
-    } catch ({ response }) {
-      try {
-        await updateAccessToken();
-        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/documents`, formData, {
-          headers: {
-            Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
-          },
-          onUploadProgress: (progressEvent) => {
-            setUploading(true);
-            const percentage = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-            setPercent(percentage);
-            setUploading(false);
-          },
-        });
-        alert('document berhasil di upload');
-      } catch ({ response: { status } }) {
-        if (status === 403) {
-          await logout(dispatch);
-          alert('Silahkan login kembali');
-          navigate('/login');
-        }
-      }
+    } catch (err) {
+      console.log(err.message);
     }
   };
 
@@ -103,6 +89,7 @@ function UploadForm() {
       interval = setTimeout(() => {
         alert('document berhasil di upload');
         setFiles([]);
+        setPercent(0);
       }, 1000);
     }
 
@@ -116,20 +103,24 @@ function UploadForm() {
     await uploadFiles({ documentKind: documentType, documents: files });
   };
 
+  const onDeleteFileHandler = (file) => {
+    setFiles((prevState) => prevState.filter((value) => value.name !== file));
+  };
+
   return (
-    <section>
-      <form encType="multipart/form-data" className="mobile:mt-10 md:mt-0 md:w-1/3 mx-auto relative" onSubmit={onSubmit}>
+    <section className="w-2/3">
+      <form encType="multipart/form-data" className="mobile:mt-10 md:mt-0 mx-auto relative" onSubmit={onSubmit}>
         <div>
           <div>
             <header className="mobile:justify-center flex flex-col items-center mb-4">
-              <h1 className="text-xl">Upload Dokumen</h1>
-              <p className="text-slate-500">Isi form di bawah untuk mengirim dokumen</p>
+              <h1 className="text-2xl">Upload Dokumen</h1>
+              <p className="text-slate-500 text-xl">Isi form di bawah untuk mengirim dokumen</p>
             </header>
             <div className="type mb-5">
-              <h1 className="mb-3">Jenis Dokumen</h1>
+              <h1 className="mb-3 text-xl">Jenis Dokumen</h1>
               <SelectInput options={selectOptions} onChangeHandler={(e) => setDocumentType(e.target.value)} value={documentType} />
             </div>
-            <div>
+            <div className="w-full">
               <UploadFileInput percent={percent} fileSize={5} fileType="pdf" uploading={uploading} setFiles={setFiles} files={files} />
             </div>
             <button type="submit" className="right-0 mt-3 bg-gradient-to-r from-secondary-blue to-secondary-blue-dark text-white w-full rounded-full py-1 hover:from-secondary-blue-dark hover:to-blue-950 transition-colors">Upload</button>
@@ -137,13 +128,13 @@ function UploadForm() {
           </div>
 
         </div>
-        <section className="">
+        <section className="bg-sidebar-color rounded-xl p-6">
           <h1 className="font-semibold">Uploaded File</h1>
           {files.map((file) => (
-            <div className="flex justify-between mt-4" key={file.name}>
-              <div className="flex gap-5">
-                <span className="text-4xl flex justify-center items-center w-[40px] h-[40px]"><AiOutlineFilePdf /></span>
-                <div className="mr-2 w-32">
+            <div className="flex justify-between mt-4 bg-[#FBFBFB] shadow-lg rounded-xl px-6 py-4" key={file.name}>
+              <div className="flex gap-5 w-2/5">
+                <span className="text-4xl flex justify-center items-center h-[40px]"><AiOutlineFilePdf /></span>
+                <div className="mr-2 flex flex-col gap-2">
                   <h2 className="text-[12px]">{splitFileName(file.name)[0]}</h2>
                   <div className="flex gap-2 text-sm items-center text-gray-500 w-full">
                     <h3>{getFileType(file.type)}</h3>
@@ -172,6 +163,16 @@ function UploadForm() {
                   </span>
 
                 )}
+              </div>
+              <div className="flex items-center">
+                <button
+                  type="button"
+                  className="text-xl text-red-600"
+                  onClick={() => onDeleteFileHandler(file.name)}
+                >
+                  <span><CgClose /></span>
+
+                </button>
               </div>
 
             </div>

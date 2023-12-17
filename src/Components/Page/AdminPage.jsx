@@ -16,25 +16,26 @@ function AdminPage() {
   const { requests: { requests, requestSearched: req } } = useSelector((states) => states);
   const data = useMemo(() => requests, [requests, req]);
   const requestSearch = useMemo(() => req, [req, requests]);
+  console.log({ requestSearch });
   const columns = [
     {
-      accessor: 'requestedBy[0].name',
+      accessor: 'users.name',
       Header: 'Name',
     },
     {
-      accessor: 'created_at',
+      accessor: 'createdAt',
       Header: 'Created',
-      Cell: ({ row }) => CreatedColumn({ date: row.original.created_at }),
+      Cell: ({ row }) => CreatedColumn({ date: row.original.createdAt }),
     },
     {
-      accessor: 'processed',
+      accessor: 'process',
       Header: 'Process',
-      Cell: ({ row }) => ProcessedColumn({ process: row.original.processed }),
+      Cell: ({ row }) => ProcessedColumn({ process: row.original.process }),
     },
     {
-      accessor: 'request_id',
+      accessor: 'id',
       Header: 'Action',
-      Cell: ({ row }) => ActionTable({ id: row.original.request_id, downloadAction: asyncDownloadDocuments, completedStatusAction: asyncChangeStatusDocument }),
+      Cell: ({ row }) => ActionTable({ id: row.original.id, downloadAction: asyncDownloadDocuments, completedStatusAction: asyncChangeStatusDocument }),
     },
   ];
   const memoizeColumns = useMemo(() => columns, []);

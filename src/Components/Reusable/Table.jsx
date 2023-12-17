@@ -51,7 +51,7 @@ function Table({ columns = [], data = [] }) {
 
         </tbody>
       </table>
-      <PaginateButton canNextPage={canNextPage} canPreviousPage={canPreviousPage} nextPage={nextPage} pageIndex={pageIndex} previousPage={previousPage} />
+      <PaginateButton canNextPage={canNextPage} canPreviousPage={canPreviousPage} nextPage={nextPage} pageIndex={pageIndex} previousPage={previousPage} pageCount={pageCount} />
     </>
   );
 }
