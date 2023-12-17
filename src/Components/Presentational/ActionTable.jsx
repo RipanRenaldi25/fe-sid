@@ -11,7 +11,7 @@ function ActionTable({ id, downloadAction, completedStatusAction }) {
       <button type="button" className="text-white w-7 h-7 hover:bg-gray-700 transition-colors bg-purple-color flex justify-center items-center rounded-full" onClick={() => dispatch(downloadAction(id))}>
         <span className="text-xl"><HiOutlineDownload /></span>
       </button>
-      <button type="button" className="text-white w-7 h-7 hover:bg-gray-700 transition-colors bg-purple-color flex justify-center items-center rounded-full" onClick={() => dispatch(completedStatusAction(id, 'completed'))}>
+      <button type="button" className="text-white w-7 h-7 hover:bg-gray-700 transition-colors bg-purple-color flex justify-center items-center rounded-full" onClick={() => dispatch(completedStatusAction(id, 'PROCESSED'))}>
         <span className="text-xl"><AiOutlineCheck /></span>
       </button>
     </div>

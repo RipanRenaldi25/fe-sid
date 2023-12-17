@@ -15,20 +15,21 @@ import useDebounce from '../../hooks/useDebounce';
 import ProcessedInput from '../Reusable/ProcessedInput';
 import Table from '../Reusable/Table';
 
-function AdminTable({ columns, data = [], requestSearch = [] }) {
+function AdminTable({ columns, requestSearch = [], data = [] }) {
   const [searchbarInput, { onChangeInputHandler }] = useFormInput('searchForm', {
     onChangeInput: changeInputSearchFormActionCreator, onClearAction: clearInputLoginActionCreator,
   });
-  console.log({ requestSearch });
   const dispatch = useDispatch();
-  const debounceValue = useDebounce(searchbarInput.name, 400);
-  useEffect(() => {
-    dispatch(asyncSearchRequest({
-      keyword: debounceValue,
-      date: searchbarInput.date,
-      status: searchbarInput.process,
-    }));
-  }, [debounceValue, searchbarInput.date, searchbarInput.process]);
+  // const debounceValue = useDebounce(searchbarInput.name, 400);
+
+  // Menyebabkan infinite loop
+  // useEffect(() => {
+  //   dispatch(asyncSearchRequest({
+  //     keyword: debounceValue,
+  //     date: debounceDate,
+  //     status: debounceProcess,
+  //   }));
+  // }, []);
   return (
     <section className="bg-sidebar-color py-10  rounded-xl">
       <header className="px-6 mb-4 relative">
@@ -54,7 +55,6 @@ function AdminTable({ columns, data = [], requestSearch = [] }) {
 
 AdminTable.propTypes = {
   columns: arrayOf(object).isRequired,
-  data: arrayOf(object).isRequired,
   requestSearch: arrayOf(object),
 };
 

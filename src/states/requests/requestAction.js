@@ -28,7 +28,7 @@ export const updateSpecificRequestActionCreator = (id, processed) => ({
   type: REQUESTS_TYPE.updateSpecificRequest,
   payload: {
     id,
-    processed,
+    process: processed,
   },
 });
 
@@ -47,6 +47,7 @@ export const removeSearchRequest = () => ({
 
 export const asyncChangeStatusDocument = (requestId, status) => async (dispatch) => {
   try {
+    console.log({ requestId, status });
     await changeStatusProcess(requestId, status);
     dispatch(updateSpecificRequestActionCreator(requestId, status));
   } catch (e) {

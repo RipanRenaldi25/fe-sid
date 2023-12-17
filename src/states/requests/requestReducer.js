@@ -20,20 +20,23 @@ const requestReducer = (state = initialState, action = {}) => {
         isFetching: action.payload.isFetching,
       };
     case REQUESTS_TYPE.updateSpecificRequest:
+      console.log(action.payload);
       return {
         ...state,
         requests: state.requests.map((request) => {
-          if (request.request_id === action.payload.id) {
+          console.log({ request });
+          if (request.id === action.payload.id) {
+            console.log('true');
             return {
               ...request,
-              processed: action.payload.processed,
+              process: action.payload.process,
             };
           }
           return request;
         }),
         requestSearched: state.requestSearched.map((request) => ({
           ...request,
-          processed: request.request_id === action.payload.id ? action.payload.processed : request.processed,
+          process: request.id === action.payload.id ? action.payload.process : request.process,
         })),
       };
     case REQUESTS_TYPE.setRequestSearch:
