@@ -5,6 +5,7 @@ const initialState = {
   error: '',
   requests: [],
   requestSearched: [],
+  userRequests: [],
 };
 
 const requestReducer = (state = initialState, action = {}) => {
@@ -48,6 +49,11 @@ const requestReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         requestSearched: [],
+      };
+    case REQUESTS_TYPE.getUserRequests:
+      return {
+        ...state,
+        userRequests: action.payload.requests,
       };
     default:
       return state;

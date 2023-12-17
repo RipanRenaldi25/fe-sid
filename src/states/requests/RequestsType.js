@@ -6,6 +6,7 @@ const REQUESTS_TYPE = {
   updateSpecificRequest: 'UPDATE_SPECIFIC_REQUEST',
   setRequestSearch: 'SEARCH_REQUEST_SEARCH',
   removeSetRequestSearch: 'REMOVE_SET_REQUEST_SEARCH',
+  getUserRequests: 'GET_USER_REQUESTS',
 };
 
 export default REQUESTS_TYPE;

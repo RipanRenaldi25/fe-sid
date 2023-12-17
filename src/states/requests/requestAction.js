@@ -1,5 +1,5 @@
 import executeDownload, {
-  changeStatusProcess, deleteCompressedDocument, downloadMultipleDocument, getBlobImages, getDocuments, getRequests, searchRequest,
+  changeStatusProcess, deleteCompressedDocument, downloadMultipleDocument, getBlobImages, getDocuments, getRequests, getUserRequests, searchRequest,
 } from '../../utils/utilities';
 import REQUESTS_TYPE from './RequestsType';
 
@@ -41,6 +41,13 @@ export const setRequestSearch = (request) => ({
 
 export const removeSearchRequest = () => ({
   type: REQUESTS_TYPE.removeSetRequestSearch,
+});
+
+export const setUserRequests = (requests) => ({
+  type: REQUESTS_TYPE.getUserRequests,
+  payload: {
+    requests,
+  },
 });
 
 // ----------------------------------------------------------------------------------- //
@@ -85,5 +92,15 @@ export const asyncSearchRequest = ({ keyword, date, status }) => async (dispatch
     dispatch(setRequestSearch(response.data));
   } catch (e) {
     console.log(e);
+  }
+};
+
+export const asyncGetUserRequests = (nik) => async (dispatch) => {
+  try {
+    const { data: { data } } = await getUserRequests(nik);
+    console.log({ data });
+    dispatch(setUserRequests(data.requests));
+  } catch (err) {
+    console.log(err);
   }
 };

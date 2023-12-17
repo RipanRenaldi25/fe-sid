@@ -230,4 +230,14 @@ const executeDownload = async (blobs) => {
   URL.revokeObjectURL(url);
 };
 
+export const getUserRequests = async (nik) => {
+  const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/user/${nik}`, {
+    headers: {
+      Authorization: `BEARER ${getAccessToken({ key: 'ACCESS_TOKEN' })}`,
+    },
+  });
+
+  return response;
+};
+
 export default executeDownload;

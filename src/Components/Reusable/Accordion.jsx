@@ -3,7 +3,7 @@ import React from 'react';
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 
 function Accordion({
-  title, description, isActive, onClickHandler,
+  title, description, isActive, onClickHandler, children,
 }) {
   return (
     <div className={`group w-3/4 box-lg border px-10 py-4 relative rounded-lg shadow-lg overflow-hidden ${isActive ? 'h-full' : 'h-[80px]'}`}>
@@ -18,6 +18,7 @@ function Accordion({
       </header>
       <div className="overflow-hidden mobile:text-sm md:text-base">
         <p>{description}</p>
+        {children}
       </div>
     </div>
   );

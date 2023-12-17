@@ -20,6 +20,7 @@ export {
   asyncSearchRequest,
   asyncChangeStatusDocument,
   updateSpecificRequestActionCreator,
+  asyncGetUserRequests,
 } from './requests/requestAction';
 
 export {
