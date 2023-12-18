@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         VM_IP = '10.128.0.6'
-        VITE_API_BASE_URL='http://34.36.244.103/'
     }
     triggers {
         pollSCM '* * * * *'
@@ -44,7 +43,7 @@ pipeline {
                             sudo docker rm -f react-app
                             sudo docker image rm -f $DOCKER_USERNAME/react-app:latest
                             sudo docker pull $DOCKER_USERNAME/react-app:latest
-                            sudo docker run -dp 80:80 --name react-app -e VITE_API_BASE_URL=$VITE_API_BASE_URL $DOCKER_USERNAME/react-app:latest
+                            sudo docker run -dp 80:80 --name react-app $DOCKER_USERNAME/react-app:latest
                             sudo docker ps
                         """
                     '''
