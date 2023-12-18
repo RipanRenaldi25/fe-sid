@@ -118,7 +118,7 @@ function App() {
           </div>
         )}
         {isLogin && user.role === 'admin' && (
-          <article className="Admin Page relative min-h-screen">
+          <article className="Admin Page relative min-h-screen bg-bg-color">
             <section>
               <Overlay
                 isOpen={isOpen}

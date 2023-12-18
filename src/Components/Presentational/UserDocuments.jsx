@@ -16,7 +16,11 @@ function UserDocuments() {
         <h1 className="text-2xl font-semibold">Dokumen</h1>
       </header>
       <div className="mt-8 bg-white rounded-xl py-4 px-10">
-        <DocumentStatusList documentList={userRequests} />
+        {userRequests.length > 0 ? (
+          <DocumentStatusList documentList={userRequests} />
+        ) : (
+          <h1 className="font-semibold text-center">Silahkan unggah dokumen terlebih dahulu!</h1>
+        )}
       </div>
     </div>
   );
