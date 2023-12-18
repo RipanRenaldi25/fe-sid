@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        VM_IP = '10.128.0.4'
-        VITE_API_BASE_URL=''
+        VM_IP = '10.128.0.6'
+        VITE_API_BASE_URL='http://34.36.244.103/'
     }
     triggers {
         pollSCM '* * * * *'
@@ -39,12 +39,13 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'be-vm', keyFileVariable: 'PRIVATE_KEY', usernameVariable: 'USERNAME'), usernamePassword(credentialsId: 'docker-auth', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     sh '''
-                        ssh -i $PRIVATE_KEY $USERNAME@$VM_IP """
-                            docker rm -f react-app
-                            docker image rm -f $DOCKER_USERNAME/react-app:latest
-                            docker pull $DOCKER_USERNAME/react-app:latest
-                            docker run -dp 80:80 --name react-app -e VITE_API_BASE_URL=$VITE_API_BASE_URL
-                            docker ps
+                        echo $VITE_API_BASE_URL
+                        ssh -o StrictHostKeyChecking=no -i $PRIVATE_KEY $USERNAME@$VM_IP """
+                            sudo docker rm -f react-app
+                            sudo docker image rm -f $DOCKER_USERNAME/react-app:latest
+                            sudo docker pull $DOCKER_USERNAME/react-app:latest
+                            sudo docker run -dp 80:80 --name react-app -e VITE_API_BASE_URL=$VITE_API_BASE_URL $DOCKER_USERNAME/react-app:latest
+                            sudo docker ps
                         """
                     '''
                 }
