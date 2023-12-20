@@ -14,7 +14,7 @@ function LandingPage() {
       <section className="grid mobile:grid-cols-2 mobile:h-[670px] md:grid-cols-4 md:grid-rows-6 gap-4 md:h-[500px]">
         <div className=" hover:cursor-pointer mobile:row-span-6 group relative col-span-2 row-span-6 p-10 rounded-2xl bg-cover bg-left text-white" style={{ backgroundImage: `url(${bgDark})` }} onClick={() => navigate('/home')} id="#info">
           <p className="mobile:text-md text-lg font-thin mb-3">Informasi</p>
-          <h1 className="mobile:text-4xl md:text-5xl max-w-md">Desa Babakan Peuteuy</h1>
+          <h1 className="mobile:text-4xl md:text-5xl max-w-md">Nama Desa</h1>
           <div className="text-2xl absolute top-1/2 right-0">
             <button type="button" className="border rounded-full px-1 py-0.5 scale-0 group-hover:scale-100 transition-all duration-100  hover:duration-200 hover:text-black">
               <NavigationItem path="/home" title={<MdKeyboardDoubleArrowRight className="hover:text-black" />} />
