@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        VM_IP = '10.128.0.6'
+        VM_IP = '192.168.10.7'
     }
     triggers {
         pollSCM '* * * * *'
